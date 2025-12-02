@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Fatan Najuda Sarwan | Backend & Data Engineer</title>
+    <meta name="description"
+        content="I'm Muhammad Fatan Najuda Sarwan (Fatan), a Backend Engineer & Data Engineer from Indonesia who builds reliable Golang services and scalable data pipelines.">
+    <meta name="keywords"
+        content="Muhammad Fatan Najuda Sarwan, Fatan, Backend Engineer, Data Engineer, Golang, PostgreSQL, Airflow, BigQuery, dbt, GCS, AWS S3, GCP, Clean Architecture">
+    <meta name="author" content="Muhammad Fatan Najuda Sarwan">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://example.com">
+    <meta property="og:title" content="Muhammad Fatan Najuda Sarwan | Backend & Data Engineer">
+    <meta property="og:description"
+        content="Backend Engineer & Data Engineer crafting reliable services and data pipelines in Golang, PostgreSQL, Airflow, and BigQuery.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://example.com">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Muhammad+Fatan+Najuda+Sarwan">
+    <style>
+        /* Base */
+        :root {
+            --bg: #f7f9fb;
+            --panel: #ffffff;
+            --text: #0f172a;
+            --muted: #475569;
+            --accent: #0d9488;
+            --accent-strong: #0f766e;
+            --accent-soft: #d1fae5;
+            --border: #e2e8f0;
+            --shadow: 0 18px 60px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body.no-js .reveal {
+            opacity: 1;
+            transform: none;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", "Helvetica Neue", system-ui, -apple-system, sans-serif;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(13, 148, 136, 0.08), transparent 35%),
+                radial-gradient(circle at 80% 10%, rgba(13, 148, 136, 0.05), transparent 30%),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        figure {
+            margin: 0;
+        }
+
+        ::selection {
+            background: rgba(13, 148, 136, 0.15);
+            color: var(--text);
+        }
+
+        main {
+            display: block;
+        }
+
+        .container {
+            width: min(1100px, 92vw);
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 4rem 0 3.2rem;
+            scroll-margin-top: 110px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            margin: 0 0 0.6rem;
+            color: var(--text);
+            line-height: 1.2;
+        }
+
+        p {
+            margin: 0 0 1rem;
+            color: var(--muted);
+        }
+
+        ul {
+            padding-left: 1.2rem;
+            margin: 0.2rem 0 1rem;
+            color: var(--muted);
+        }
+
+        /* Header */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .site-header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: var(--border);
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+        }
+
+        .nav-shell {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0.5rem;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--text);
+        }
+
+        .brand-mark {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+            color: #fff;
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+            box-shadow: 0 10px 25px rgba(13, 148, 136, 0.35);
+        }
+
+        nav {
+            position: relative;
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 110%;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.15);
+            overflow: hidden;
+            min-width: 200px;
+        }
+
+        .nav-links li {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-links li:last-child {
+            border-bottom: none;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 0.85rem 1.2rem;
+            font-weight: 600;
+            color: var(--text);
+            transition: color 0.2s ease, background 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus {
+            background: var(--accent-soft);
+            color: var(--accent-strong);
+            outline: none;
+        }
+
+        .nav-toggle {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--panel);
+            display: grid;
+            place-items: center;
+            gap: 4px;
+            padding: 0.65rem;
+            cursor: pointer;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--text);
+            border-radius: 999px;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .site-header.nav-open .nav-links {
+            display: block;
+        }
+
+        .site-header.nav-open .nav-toggle span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .site-header.nav-open .nav-toggle span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .site-header.nav-open .nav-toggle span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        .stat-box {
+            flex: 1 1 160px;
+            min-width: 160px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1rem 1.1rem;
+            box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 22px 55px rgba(15, 23, 42, 0.15);
+            border-color: rgba(45, 212, 191, 0.7);
+        }
+
+        /* Hero */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            align-items: center;
+            padding: 4.5rem 0 3.5rem;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.7rem;
+            background: var(--accent-soft);
+            color: var(--accent-strong);
+            border-radius: 999px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 4vw + 1rem, 3.6rem);
+            margin-top: 0.8rem;
+            animation: heroRise 0.8s ease-out both;
+        }
+
+        .hero .subhead {
+            font-size: 1.25rem;
+            color: var(--text);
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+        }
+
+        .hero p {
+            max-width: 650px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            padding: 0.85rem 1.3rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            font-weight: 700;
+            cursor: pointer;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.25s ease,
+                background 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease;
+            text-decoration: none;
+        }
+
+        .button.primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 12px 35px rgba(13, 148, 136, 0.35);
+        }
+
+        .button.secondary {
+            background: transparent;
+            color: var(--text);
+        }
+
+        .button:hover,
+        .button:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.14);
+            outline: none;
+        }
+
+        .profile-frame {
+            width: min(260px, 70vw);
+            /* mobile: ikut lebar layar, max 260px */
+            height: min(260px, 70vw);
+            margin: 0 auto;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #dff5f3;
+            /* hijau muda full lingkaran */
+            box-shadow: 0 18px 60px rgba(15, 23, 42, 0.06);
+            display: grid;
+            place-items: center;
+            position: relative;
+        }
+
+        .profile-frame::after {
+            content: "";
+            position: absolute;
+            inset: 14px;
+            border-radius: 50%;
+            background: conic-gradient(from 120deg, rgba(13, 148, 136, 0.18), transparent 55%);
+            z-index: 0;
+            filter: blur(2px);
+        }
+
+        .profile-frame img {
+            width: 110%;
+            /* sedikit diperbesar biar proporsional */
+            height: 110%;
+            object-fit: cover;
+            /* jaga proporsi wajah */
+            border-radius: 50%;
+        }
+
+        .hero-details {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .stat-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            flex: 1 1 160px;
+            min-width: 160px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1rem 1.1rem;
+            box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-strong);
+        }
+
+        .stat-label {
+            color: var(--muted);
+        }
+
+        /* Section headers */
+        .section-header {
+            margin-bottom: 2.1rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            margin-bottom: 0.4rem;
+            letter-spacing: -0.3px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.8rem;
+            border-radius: 999px;
+            background: rgba(13, 148, 136, 0.12);
+            color: var(--accent-strong);
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.04em;
+            text-transform: none;
+            /* biar tetap “About”, bukan ALL CAPS */
+            margin-bottom: 0.9rem;
+        }
+
+        .section-description {
+            margin-top: 0.25rem;
+            font-size: 1.05rem;
+            line-height: 1.65;
+            max-width: 720px;
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            gap: 1.2rem;
+            grid-template-columns: 1fr;
+        }
+
+        .about-card {
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 18px;
+            padding: 1.6rem 1.8rem;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 22px 55px rgba(15, 23, 42, 0.12);
+            border-color: rgba(45, 212, 191, 0.6);
+        }
+
+        .about-card h3 {
+            margin: 0 0 0.7rem;
+            font-size: 1.05rem;
+        }
+
+        .about-card p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .about-card ul {
+            margin: 0.4rem 0 0;
+            padding-left: 1.2rem;
+        }
+
+        .about-card li {
+            margin-bottom: 0.4rem;
+        }
+
+        .about-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .about-card li {
+            position: relative;
+            padding-left: 1.6rem;
+            margin-bottom: 0.7rem;
+            color: var(--muted);
+        }
+
+        .about-card li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.55rem;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+            box-shadow: 0 6px 12px rgba(13, 148, 136, 0.4);
+            transition: transform 0.2s ease;
+        }
+
+        .about-card li:hover::before {
+            transform: scale(1.2);
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 18px;
+            padding: 1.6rem 1.8rem;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.07);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 22px 55px rgba(15, 23, 42, 0.12);
+            border-color: rgba(45, 212, 191, 0.6);
+        }
+
+        .skill-card h3 {
+            margin: 0 0 0.6rem;
+            font-size: 1.05rem;
+        }
+
+        .skill-card p {
+            margin: 0 0 0.9rem;
+            color: var(--muted);
+        }
+
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+        }
+
+        .badge {
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            background: #f1f5f9;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(13, 148, 136, 0.12);
+            border-color: var(--accent-soft);
+        }
+
+        .skill-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-row {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-flex;
+            padding: 0.4rem 0.75rem;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: #f8fafc;
+            color: var(--text);
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(13, 148, 136, 0.12);
+            border-color: var(--accent-soft);
+        }
+
+        /* Experience */
+        .timeline {
+            position: relative;
+            padding-left: 1rem;
+            margin-top: 1.2rem;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 12px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(var(--accent), transparent);
+            opacity: 0.3;
+        }
+
+        .experience-item {
+            position: relative;
+            margin-bottom: 1.8rem;
+            padding: 1.4rem 1.8rem 1.6rem 1.8rem;
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border-radius: 18px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 22px 55px rgba(15, 23, 42, 0.12);
+            border-color: rgba(45, 212, 191, 0.6);
+        }
+
+        .experience-header {
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-header h3 {
+            margin: 0;
+            font-size: 1.02rem;
+        }
+
+        .period {
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* List di dalam card */
+        .experience-item ul {
+            margin: 0.6rem 0 0;
+            padding-left: 1.2rem;
+        }
+
+        .experience-item li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* Titik hijau di awal timeline */
+        .timeline::after {
+            content: "";
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent-strong);
+            top: -6px;
+            left: 12px;
+            /* sama seperti .timeline::before di mobile */
+            box-shadow: 0 0 0 6px rgba(13, 148, 136, 0.18);
+            z-index: 5;
+        }
+
+
+        .timeline::after {
+            content: "";
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent-strong);
+            top: -6px;
+            left: 12px;
+            box-shadow: 0 0 0 6px rgba(13, 148, 136, 0.18);
+            z-index: 5;
+        }
+
+
+        .experience-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: baseline;
+        }
+
+        .experience-header h3 {
+            margin: 0;
+        }
+
+        .period {
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        /* Projects */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .project-card {
+            position: relative;
+            display: grid;
+            gap: 0.8rem;
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 18px;
+            padding: 1.4rem 1.8rem 1.7rem;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.07);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 22px 55px rgba(15, 23, 42, 0.12);
+            border-color: rgba(45, 212, 191, 0.6);
+        }
+
+        .project-card h3 {
+            margin: 0.4rem 0 0.5rem;
+            font-size: 1.02rem;
+        }
+
+        .project-card p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .project-card .tech-stack {
+            margin-top: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        .project-card strong {
+            color: var(--text);
+        }
+
+        /* Tombol di bagian bawah card projects saja */
+        .project-card .button.secondary {
+            width: 100%;
+            justify-content: center;
+            margin-top: 0.9rem;
+            background: #f8fafc;
+            border-radius: 999px;
+            border-color: rgba(148, 163, 184, 0.4);
+        }
+
+        .project-card .button.secondary:hover {
+            border-color: rgba(45, 212, 191, 0.7);
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            align-items: center;
+            justify-content: flex-start;
+            margin-top: 0.1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .pill {
+            padding: 0.38rem 0.8rem;
+            background: var(--accent-soft);
+            color: var(--accent-strong);
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.86rem;
+            white-space: nowrap;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 0.35rem;
+            flex-wrap: wrap;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 1.5rem;
+        }
+
+        .contact-card {
+            flex: 0 0 100%;
+            max-width: 720px;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 22px 55px rgba(15, 23, 42, 0.12);
+            border-color: rgba(45, 212, 191, 0.7);
+        }
+
+        .contact-card-main h3 {
+            margin: 0;
+        }
+
+        .contact-intro {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border-radius: 18px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            padding: 1.6rem 1.9rem;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.07);
+            display: grid;
+            gap: 0.9rem;
+        }
+
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: baseline;
+        }
+
+        .contact-row .label {
+            min-width: 80px;
+            font-weight: 700;
+            color: var(--muted);
+        }
+
+        .contact-row a {
+            font-weight: 700;
+            color: var(--accent-strong);
+            text-decoration: none;
+        }
+
+        .contact-row a:hover,
+        .contact-row a:focus {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 0 2.5rem;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            text-align: center;
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        footer .socials {
+            display: flex;
+            gap: 0.7rem;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+
+        footer a {
+            color: var(--accent-strong);
+            font-weight: 700;
+        }
+
+        /* Reveal animation */
+        .js .reveal {
+            opacity: 0;
+            transform: translateY(24px) scale(0.98);
+            filter: blur(8px);
+            transition:
+                opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+                filter 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        /* default: fade + slide up */
+        .js .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+
+        /* optional directional variants */
+        .js .reveal.reveal-from-left {
+            transform: translateX(-40px) scale(0.98);
+        }
+
+        .js .reveal.reveal-from-right {
+            transform: translateX(40px) scale(0.98);
+        }
+
+        .js .reveal.reveal-from-left.is-visible,
+        .js .reveal.reveal-from-right.is-visible {
+            transform: translateX(0) scale(1);
+        }
+
+        .about-card.reveal:nth-child(1),
+        .skill-card.reveal:nth-child(1),
+        .project-card.reveal:nth-child(1),
+        .experience-item.reveal:nth-child(1) {
+            transition-delay: 0.05s;
+        }
+
+        .about-card.reveal:nth-child(2),
+        .skill-card.reveal:nth-child(2),
+        .project-card.reveal:nth-child(2),
+        .experience-item.reveal:nth-child(2) {
+            transition-delay: 0.12s;
+        }
+
+        .about-card.reveal:nth-child(3),
+        .skill-card.reveal:nth-child(3),
+        .project-card.reveal:nth-child(3),
+        .experience-item.reveal:nth-child(3) {
+            transition-delay: 0.19s;
+        }
+
+        .project-card.reveal:nth-child(4),
+        .experience-item.reveal:nth-child(4) {
+            transition-delay: 0.26s;
+        }
+
+        /* responsive tweak: stack & center key sections on small screens */
+        @media (max-width: 720px) {
+            section {
+                padding: 3.4rem 0 2.6rem;
+            }
+
+            .hero {
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-details {
+                justify-items: center;
+            }
+
+            .cta-group {
+                justify-content: center;
+            }
+
+            .stat-row {
+                justify-content: center;
+            }
+
+            .profile-frame {
+                margin: 0 auto;
+            }
+
+            .project-grid {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            }
+
+            .contact-grid {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+        }
+
+        /* responsive tweak: tighter spacing on very small screens */
+        @media (max-width: 540px) {
+            .container {
+                width: min(100%, 94vw);
+            }
+
+            section {
+                padding: 3rem 0 2.2rem;
+            }
+
+            .cta-group {
+                gap: 0.6rem;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Keyframes */
+        @keyframes heroRise {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (min-width: 720px) {
+            .nav-links {
+                position: static;
+                display: flex;
+                align-items: center;
+                gap: 1.25rem;
+                flex-direction: row;
+                border: none;
+                box-shadow: none;
+                background: transparent;
+                min-width: auto;
+            }
+
+            .nav-links li {
+                border: none;
+            }
+
+            .nav-toggle {
+                display: none;
+            }
+
+            .nav-links a {
+                padding: 0.3rem 0;
+                border-bottom: 2px solid transparent;
+            }
+
+            .nav-links a:hover {
+                background: transparent;
+                border-color: var(--accent-strong);
+            }
+
+            .site-header.nav-open .nav-links {
+                display: flex;
+            }
+        }
+
+        @media (min-width: 880px) {
+            section {
+                padding: 5.2rem 0;
+            }
+
+            .hero {
+                grid-template-columns: 1.1fr 0.9fr;
+                gap: 3rem;
+                padding: 6rem 0 4rem;
+            }
+
+            .profile-frame {
+                width: 320px;
+                height: 320px;
+            }
+
+            .profile-frame::before,
+            .profile-frame::after {
+                content: none !important;
+                background: none !important;
+                box-shadow: none !important;
+            }
+
+
+            .about-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .contact-grid {
+                grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+                gap: 1.5rem;
+            }
+
+            .timeline {
+                padding-left: 0;
+            }
+
+            .timeline::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .timeline::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .experience-item {
+                width: calc(50% - 2rem);
+                margin-left: auto;
+                margin-right: 0;
+            }
+
+            .experience-item:nth-child(odd) {
+                margin-left: 0;
+                margin-right: auto;
+            }
+
+            .experience-item::before {
+                right: -8px;
+            }
+
+            .experience-item:nth-child(odd)::before {
+                left: -8px;
+            }
+
+            .experience-item {
+                margin-bottom: 1.8rem;
+            }
+        }
+
+        @media (max-width: 879px) {
+
+            .timeline::before,
+            .timeline::after {
+                content: none;
+                display: none;
+            }
+
+            .timeline {
+                padding-left: 0;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .project-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        form {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        form>div {
+            margin: 0;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Muhammad Fatan Najuda Sarwan",
+      "jobTitle": "Backend Engineer & Data Engineer",
+      "description": "Backend Engineer & Data Engineer from Indonesia focusing on Golang services, PostgreSQL, Airflow, BigQuery, and data pipelines.",
+      "url": "https://example.com",
+      "sameAs": [
+        "https://www.linkedin.com/in/fatan-placeholder",
+        "https://github.com/fatan-placeholder"
+      ]
+    }
+  </script>
+</head>
+
+<body class="no-js">
+    <header class="site-header" aria-label="Primary">
+        <div class="container nav-shell">
+            <a href="#home" class="brand">
+                <span class="brand-mark" aria-hidden="true">F</span>
+                <span>Fatan Najuda — Engineering Portfolio</span>
+            </a>
+            <nav aria-label="Main navigation">
+                <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero container" id="home">
+            <div class="hero-details reveal reveal-from-left">
+                <h1>Hi, I&apos;m Fatan — Backend &amp; Data Engineer.</h1>
+                <p class="subhead">I build reliable backend services and scalable data pipelines.</p>
+                <p>I have 4+ years of experience building backend microservices, designing PostgreSQL databases, and
+                    orchestrating data workflows that support real-world business operations.</p>
+                <div class="cta-group">
+                    <a class="button primary" href="#projects">View Projects</a>
+                    <a class="button primary" target="_blank" href="assets/cv/Fatan-CV.pdf" download>Download CV</a>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-box">
+                        <div class="stat-number">4+ yrs</div>
+                        <div class="stat-label">Engineering experience</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">Golang</div>
+                        <div class="stat-label">Primary language</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">Data</div>
+                        <div class="stat-label">Pipelines &amp; analytics</div>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal reveal-from-right">
+                <figure class="profile-frame" aria-label="Profile photo">
+                    <img src="assets/image/FOTO-DIRI.png" alt="Portrait of Muhammad Fatan Najuda Sarwan" loading="lazy">
+                </figure>
+            </div>
+        </section>
+
+        <section class="container" id="about">
+            <div class="section-header reveal">
+                <span class="eyebrow">About</span>
+                <h2>Human, pragmatic, and detail-oriented.</h2>
+                <p class="section-description">
+                    I'm Muhammad Fatan Najuda Sarwan (Fatan), a Backend & Data Engineer with strong experience building
+                    scalable backend services, data pipelines, and cloud-native systems. With a Computer Science
+                    background
+                    and hands-on work across multiple industries, I focus on designing reliable architectures,
+                    optimizing
+                    workflows, and delivering solutions that help businesses operate efficiently and make data-driven
+                    decisions.
+                </p>
+            </div>
+            <div class="about-grid">
+                <article class="about-card reveal">
+                    <h3>Story</h3>
+                    <p>
+                        I began my career as a Backend Engineer, building and scaling production-ready systems using
+                        Golang and modern architecture patterns.
+                        Over the years, I expanded into Data Engineering to work across the full data lifecycle from
+                        ingestion, transformation, and orchestration to analytics ready datasets.
+                        Today, I focus on creating reliable backend services and scalable data pipelines that empower
+                        teams to ship faster, make informed decisions, and operate with confidence.
+                    </p>
+                </article>
+                <article class="about-card reveal">
+                    <h3>What I do</h3>
+                    <ul>
+                        <li>Architect and develop backend services using Golang with clean, maintainable design
+                            patterns.</li>
+                        <li>Optimize databases, craft efficient SQL queries, and ensure scalable schema design.</li>
+                        <li>Build and orchestrate end-to-end data pipelines using Airflow, BigQuery, dbt, and cloud
+                            storage.</li>
+                        <li>Collaborate across engineering, product, and data teams to deliver high-impact features.
+                        </li>
+                    </ul>
+                </article>
+                <article class="about-card reveal">
+                    <h3>How I work</h3>
+                    <p>
+                        I work by combining clarity, structure, and collaboration refining requirements,
+                        designing system architectures, validating solutions with QA, and documenting clear
+                        processes. I prioritize clean abstractions, reliable delivery, and continuous improvement
+                        to ensure every system becomes more stable and predictable over time.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="container" id="skills">
+            <div class="section-header reveal">
+                <span class="eyebrow">Skills</span>
+                <h2>Tech focus and favorite patterns.</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card reveal">
+                    <h3>Backend</h3>
+                    <p>Production-grade services with clear contracts and observability.</p>
+                    <div class="badge-row">
+                        <span class="badge">Golang Native</span>
+                        <span class="badge">Rust</span>
+                        <span class="badge">Java</span>
+                        <span class="badge">Spring Frameworks</span>
+                        <span class="badge">REST API design</span>
+                        <span class="badge">Gin Frameworks</span>
+                        <span class="badge">gRPC</span>
+                        <span class="badge">Queue</span>
+                    </div>
+                </div>
+                <div class="skill-card reveal">
+                    <h3>Databases</h3>
+                    <p>Reliable persistence and query tuning for operational workloads.</p>
+                    <div class="badge-row">
+                        <span class="badge">DBMS</span>
+                        <span class="badge">RDBMS</span>
+                        <span class="badge">SQL</span>
+                        <span class="badge">NoSQL</span>
+                    </div>
+                </div>
+                <div class="skill-card reveal">
+                    <h3>Data Engineering</h3>
+                    <p>Orchestrated pipelines, modeled layers, and trusted dashboards.</p>
+                    <div class="badge-row">
+                        <span class="badge">Python</span>
+                        <span class="badge">Airflow</span>
+                        <span class="badge">BigQuery</span>
+                        <span class="badge">Jinja</span>
+                        <span class="badge">dbt</span>
+                        <span class="badge">GCS</span>
+                    </div>
+                </div>
+                <div class="skill-card reveal">
+                    <h3>DevOps / Cloud</h3>
+                    <p>Move fast with dependable environments and storage.</p>
+                    <div class="badge-row">
+                        <span class="badge">AWS S3</span>
+                        <span class="badge">GCP Composer</span>
+                        <span class="badge">GCP Cloud Storage</span>
+                        <span class="badge">Nginx</span>
+                    </div>
+                </div>
+                <div class="skill-card reveal">
+                    <h3>Practices</h3>
+                    <p>Intentional architecture and quality at every layer.</p>
+                    <div class="badge-row">
+                        <span class="badge">Modern Architecture</span>
+                        <span class="badge">Unit Testing</span>
+                        <span class="badge">Object Oriented Programming</span>
+                        <span class="badge">Software Development Approaches</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container" id="experience">
+            <div class="section-header reveal">
+                <span class="eyebrow">Experience</span>
+                <h2>Work Experiences.</h2>
+            </div>
+
+            <div class="timeline">
+
+                <!-- Data Engineer – Eratani -->
+                <article class="experience-item reveal">
+                    <div class="experience-header">
+                        <h3>Data Engineer – PT. Eratani Teknologi Nusantara</h3>
+                        <span class="period">Aug 2025 – Present · Jakarta, Indonesia</span>
+                    </div>
+                    <ul>
+                        <li>Maintenance and orchestrating ETL pipelines using Apache Airflow to automate ingestion from
+                            multiple sources.</li>
+                        <li>Building modular and reusable ingestion builders for Airflow DAGs with custom macros, Jinja
+                            templates, and dynamic schema validation.</li>
+                        <li>Refactoring and optimizing legacy ingestion scripts, reducing execution time and GCS object
+                            size while improving maintainability.</li>
+                        <li>Enhancing DBT transformation layers, including writing reusable macros and UDFs to
+                            streamline business logic transformations.</li>
+                        <li>Collaborating with data analysts and backend teams to design unified schemas and data models
+                            for finance, farmer, and user domains.</li>
+                        <li>Implementing monitoring and alerting mechanisms through Airflow task callbacks and Slack
+                            integration for data quality and job status.</li>
+                        <li>Optimizing GCS and BigQuery usage, ensuring cost efficiency and compliance with
+                            project-level quotas.</li>
+                    </ul>
+                </article>
+
+                <!-- Senior Backend Engineer – Eratani -->
+                <article class="experience-item reveal">
+                    <div class="experience-header">
+                        <h3>Senior Backend Engineer – PT. Eratani Teknologi Nusantara</h3>
+                        <span class="period">Jun 2024 – Aug 2025 · Jakarta, Indonesia</span>
+                    </div>
+                    <ul>
+                        <li>Designed and implemented scalable backend architectures (Hexagonal & Orchestration
+                            patterns), improving system performance by 20%.</li>
+                        <li>Conducted comprehensive code reviews and merge requests, mentoring junior developers and
+                            ensuring high code quality.</li>
+                        <li>Performed impact analysis and technical breakdowns to support stable development during
+                            feature changes.</li>
+                        <li>Refactored and modernized legacy services using SOLID principles, enhancing maintainability
+                            and modularity.</li>
+                        <li>Collaborated cross-functionally with frontend, QA, PMs, and UI/UX teams to deliver features
+                            efficiently.</li>
+                        <li>Developed internal notification systems to alert teams on critical production errors for
+                            faster incident response.</li>
+                    </ul>
+                </article>
+
+                <!-- Backend Engineer – Eratani -->
+                <article class="experience-item reveal">
+                    <div class="experience-header">
+                        <h3>Backend Engineer – PT. Eratani Teknologi Nusantara</h3>
+                        <span class="period">Jun 2023 – Jun 2024 · Jakarta, Indonesia</span>
+                    </div>
+                    <ul>
+                        <li>Refactored and modernized legacy codebases by applying SOLID principles, writing unit tests,
+                            and improving modularity, making systems more maintainable.</li>
+                        <li>Worked closely with frontend, QA, PMs, and UI/UX teams to deliver features on time and
+                            ensure smooth integration.</li>
+                        <li>Minimized bugs and production issues through structured error handling and defensive coding
+                            strategies.</li>
+                    </ul>
+                </article>
+
+                <!-- Development Mentor – GoEscape Academy -->
+                <article class="experience-item reveal">
+                    <div class="experience-header">
+                        <h3>Development Mentor – GoEscape Academy</h3>
+                        <span class="period">Apr 2025 – Present · Indonesia</span>
+                    </div>
+                    <ul>
+                        <li>Developed teaching strategies for mentees to master backend concepts such as microservices,
+                            database design, and architecture patterns.</li>
+                        <li>Taught industry standards including clean code, SOLID, and TDD while fostering a growth
+                            mindset.</li>
+                        <li>Conducted personalized 1-on-1 mentoring, providing structured learning paths and progress
+                            tracking.</li>
+                    </ul>
+                </article>
+
+                <!-- Freelance Backend Engineer – Astra -->
+                <article class="experience-item reveal">
+                    <div class="experience-header">
+                        <h3>Freelance Backend Engineer – PT. Astra International Tbk.</h3>
+                        <span class="period">Nov 2024 – Jan 2025 · Jakarta, Indonesia</span>
+                    </div>
+                    <ul>
+                        <li>Initiated and developed a new backend ecosystem using Rust, establishing the foundation for
+                            scalable and reliable future systems.</li>
+                    </ul>
+                </article>
+
+                <!-- Development Mentor – Aftercoffee Academy -->
+                <article class="experience-item reveal">
+                    <div class="experience-header">
+                        <h3>Development Mentor – Aftercoffee Academy</h3>
+                        <span class="period">May 2024 – Mar 2025 · Indonesia</span>
+                    </div>
+                    <ul>
+                        <li>Mentored 20+ mentees per batch in backend engineering using Go.</li>
+                        <li>Delivered project-based training to over 100+ mentees, bridging theory and real-world
+                            engineering.</li>
+                        <li>Collaborated to design scalable system architectures and guide mentees in building
+                            production-like systems.</li>
+                        <li>Conducted personalized 1-on-1 mentoring and provided continuous technical assessment.</li>
+                    </ul>
+                </article>
+
+                <!-- Backend Engineer – Yipy -->
+                <article class="experience-item reveal">
+                    <div class="experience-header">
+                        <h3>Backend Engineer – PT. Sentra Inovasi Prima (Yipy)</h3>
+                        <span class="period">Aug 2022 – Feb 2024 · Jakarta, Indonesia</span>
+                    </div>
+                    <ul>
+                        <li>Developed and refactored RESTful APIs using Go with MVC structure for maintainability.</li>
+                        <li>Designed and implemented scalable backend architecture to support product scaling and
+                            performance.</li>
+                        <li>Migrated a monolithic system to microservices, improving system flexibility and deployment
+                            efficiency.</li>
+                        <li>Managed AWS infrastructure (EC2, RDS, S3) to ensure secure and reliable system operations.
+                        </li>
+                        <li>Performed critical issue troubleshooting and collaborated closely with frontend to maintain
+                            API consistency.</li>
+                    </ul>
+                </article>
+
+                <!-- Academic Consultant – Personal Project -->
+                <article class="experience-item reveal">
+                    <div class="experience-header">
+                        <h3>Academic Consultant – Personal Project</h3>
+                        <span class="period">Jan 2019 – Apr 2024 · Indonesia</span>
+                    </div>
+                    <ul>
+                        <li>Guided university students in selecting research topics and writing structured, impactful
+                            thesis proposals.</li>
+                        <li>Provided full-cycle thesis mentoring including clarity review, technical structure, and
+                            presentation coaching.</li>
+                        <li>Offered consulting for backend development to transform student prototypes into functioning
+                            applications.</li>
+                    </ul>
+                </article>
+
+                <!-- Backend Developer – Teknologi Inovasi Mandiri -->
+                <article class="experience-item reveal">
+                    <div class="experience-header">
+                        <h3>Backend Developer – PT. Teknologi Inovasi Mandiri</h3>
+                        <span class="period">Jun 2022 – Oct 2022 · Tangerang, Indonesia</span>
+                    </div>
+                    <ul>
+                        <li>Built and maintained RESTful APIs using Spring Boot for government-driven E-SID
+                            applications.</li>
+                        <li>Developed automation systems for Bank BJB for end-of-day, month-end, and year-end processes.
+                        </li>
+                        <li>Led migration from MySQL to PostgreSQL, improving performance, scalability, and consistency.
+                        </li>
+                    </ul>
+                </article>
+
+                <!-- Junior Backend Developer – Flip ID -->
+                <article class="experience-item reveal">
+                    <div class="experience-header">
+                        <h3>Junior Backend Developer – Flip ID</h3>
+                        <span class="period">Jun 2021 – Oct 2021 · Jakarta, Indonesia</span>
+                    </div>
+                    <ul>
+                        <li>Developed RESTful API endpoints using Node.js and Express.</li>
+                        <li>Implemented JWT & Bearer Token authentication for secure user access.</li>
+                        <li>Performed API testing and ensured backend reliability using Postman.</li>
+                    </ul>
+                </article>
+
+                <!-- Web Developer – BTN -->
+                <article class="experience-item reveal">
+                    <div class="experience-header">
+                        <h3>Web Developer – Bank Tabungan Negara (Persero) Tbk.</h3>
+                        <span class="period">Aug 2020 – Mar 2021 · Jakarta, Indonesia</span>
+                    </div>
+                    <ul>
+                        <li>Developed internal attendance + HR applications using PHP (CodeIgniter) and React.</li>
+                        <li>Implemented UI/UX integrations and ensured responsive design.</li>
+                        <li>Monitored and optimized system logs using Unix/Linux to ensure application stability.</li>
+                    </ul>
+                </article>
+
+            </div>
+        </section>
+
+
+        <section class="container" id="projects">
+            <div class="section-header reveal">
+                <span class="eyebrow">Projects</span>
+                <h2>Selected work.</h2>
+                <p class="section-description">Some of the services and data pipelines I&apos;ve designed and shipped.
+                </p>
+            </div>
+            <div class="project-grid">
+
+                <article class="project-card reveal">
+                    <div class="pill-row">
+                        <span class="pill">Backend</span>
+                        <span class="pill">Finance</span>
+                    </div>
+                    <h3>Financial RAB Genarator Service</h3>
+                    <p>
+                        Backend service that generates project-wide RAB (budget plans), supporting scenarios where
+                        a single project contains multiple farmers. Generation data and securely stores
+                        files in S3 for finance operations.
+                    </p>
+                    <div class="tech-stack">Tech: Golang · Gin Frameworks · PostgreSQL</div>
+                    <p><strong>Role:</strong> Backend engineer for system design and implementation.</p>
+                </article>
+
+                <article class="project-card reveal">
+                    <div class="pill-row">
+                        <span class="pill">API</span>
+                        <span class="pill">Integration</span>
+                    </div>
+                    <h3>Third-Party Payment & ERP Integration Service</h3>
+                    <p>
+                        Backend service integrating directly with multiple third-party systems including
+                        direct bank payment gateways, SNAP BI, and Odoo. Built to ensure reliable,
+                        secure, and consistent communication across finance and ERP workflows.
+                    </p>
+                    <div class="tech-stack">Tech: Golang Native · Gin Frameworks · PostgreSQL · Redis</div>
+                    <p><strong>Role:</strong> Backend engineer handling system architecture and API integration.</p>
+                </article>
+
+                <article class="project-card reveal">
+                    <div class="pill-row">
+                        <span class="pill">Data</span>
+                        <span class="pill">Analytics</span>
+                    </div>
+                    <h3>End-to-End Data Pipeline for Farmer Analytics</h3>
+                    <p>
+                        Designed and built a reliable data pipeline that ingests, cleans, and transforms
+                        farmer operational data from transactional systems into BigQuery. The output powers
+                        real-time dashboards, performance tracking, and decision-making across agricultural operations.
+                    </p>
+                    <div class="tech-stack">Tech: Python · Airflow · BigQuery · dbt · GCS</div>
+                    <p><strong>Role:</strong> Data Engineer owning pipeline orchestration, data modeling, validation,
+                        and SLAs.</p>
+                </article>
+
+                <article class="project-card reveal">
+                    <div class="pill-row">
+                        <span class="pill">Migration</span>
+                        <span class="pill">Architecture</span>
+                    </div>
+                    <h3>System Migration & Modernization</h3>
+                    <p>Led the migration of legacy systems into modern, scalable architectures — including
+                        monolith-to-microservices restructuring, database schema redesign, and backend service
+                        refactoring to improve reliability and maintainability.</p>
+                    <div class="tech-stack">Tech: Golang · PostgreSQL · AWS · GCP · Microservices</div>
+                    <p><strong>Role:</strong> Architected migration plans, executed phased rollouts, and ensured
+                        backward compatibility during system transitions.</p>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="container" id="contact">
+            <div class="section-header reveal">
+                <span class="eyebrow">Contact</span>
+                <h2>Let&apos;s work together.</h2>
+                <p class="section-description">
+                    Open to backend, data engineering, and cross-functional projects. Feel free to reach out.
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-card reveal">
+                    <div class="contact-info">
+                        <p class="contact-intro">
+                            The fastest way to reach me is via email or LinkedIn. I&apos;m happy to discuss roles,
+                            collaborations, or technical projects.
+                        </p>
+
+                        <div class="contact-row">
+                            <span class="label">Email</span>
+                            <a href="mailto:najudaf@gmail.com">najudaf@gmail.com</a>
+                        </div>
+                        <div class="contact-row">
+                            <span class="label">LinkedIn</span>
+                            <a href="https://www.linkedin.com/in/muhammad-fatan-najuda-sarwan" target="_blank"
+                                rel="noopener">
+                                Muhammad Fatan Najuda Sarwan
+                            </a>
+                        </div>
+                        <div class="contact-row">
+                            <span class="label">GitHub</span>
+                            <a href="https://github.com/fnajudas" target="_blank" rel="noopener">
+                                fnajudas
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div>© <span data-year></span> Muhammad Fatan Najuda Sarwan. All rights reserved.</div>
+        <div class="socials" aria-label="Social links">
+            <a href="https://github.com/fnajudas" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/muhammad-fatan-najuda-sarwan/" target="_blank"
+                rel="noopener">LinkedIn</a>
+        </div>
+    </footer>
+
+    <script>
+        document.body.classList.replace('no-js', 'js');
+
+        const header = document.querySelector('.site-header');
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        const setHeaderState = () => {
+            if (!header) return;
+            const offset = window.scrollY > 8;
+            header.classList.toggle('scrolled', offset);
+        };
+
+        setHeaderState();
+        window.addEventListener('scroll', setHeaderState, { passive: true });
+
+        if (navToggle && navLinks) {
+            navToggle.addEventListener('click', () => {
+                const isOpen = header.classList.toggle('nav-open');
+                navToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+            navLinks.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', () => {
+                    header.classList.remove('nav-open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+        }
+
+        const yearEl = document.querySelector('[data-year]');
+        if (yearEl) {
+            yearEl.textContent = new Date().getFullYear();
+        }
+
+        const observer = new IntersectionObserver(
+            (entries, obs) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.15 }
+        );
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+</body>
+
+</html>
