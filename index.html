@@ -4,27 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fatan Najuda | Backend & Data Engineer</title>
+    <meta name="theme-color" content="#f7f9fb">
+    <meta name="color-scheme" content="light">
+    <title>Fatan Najuda | Backend Engineer</title>
     <meta name="description"
-        content="Fatan Najuda (Muhammad Fatan Najuda Sarwan) is a Backend & Data Engineer from Indonesia building Golang services, PostgreSQL databases, and scalable data pipelines.">
+        content="Fatan Najuda (Muhammad Fatan Najuda Sarwan) is a Backend Engineer from Indonesia building Golang services, PostgreSQL databases, and reliable production systems — with hands-on ETL and data pipelines (Airflow, dbt, BigQuery, GCS).">
     <meta name="keywords"
-        content="Fatan Najuda, Muhammad Fatan Najuda Sarwan, Backend Engineer, Data Engineer, Golang, PostgreSQL, Airflow, BigQuery, dbt, GCS, AWS S3, GCP, Clean Architecture">
+        content="Fatan Najuda, Muhammad Fatan Najuda Sarwan, Backend Engineer, Golang, PostgreSQL, Airflow, BigQuery, dbt, GCS, AWS S3, GCP, Clean Architecture, ETL">
     <meta name="author" content="Fatan Najuda">
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://fatan-portfolio.netlify.app/">
-    <meta property="og:title" content="Fatan Najuda | Backend & Data Engineer">
+    <meta property="og:title" content="Fatan Najuda | Backend Engineer">
     <meta property="og:description"
-        content="Backend & Data Engineer from Indonesia building Golang services, PostgreSQL databases, and scalable data pipelines.">
+        content="Backend Engineer from Indonesia building Golang services, PostgreSQL databases, and production systems — including ETL and data pipelines (Airflow, dbt, BigQuery, GCS).">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://fatan-portfolio.netlify.app/">
     <meta property="og:site_name" content="Fatan Najuda Portfolio">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://fatan-portfolio.netlify.app/assets/image/og-image.png">
-    <meta property="og:image:alt" content="Fatan Najuda - Backend & Data Engineer">
+    <meta property="og:image:alt" content="Fatan Najuda - Backend Engineer">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Fatan Najuda | Backend & Data Engineer">
+    <meta name="twitter:title" content="Fatan Najuda | Backend Engineer">
     <meta name="twitter:description"
-        content="Backend & Data Engineer from Indonesia building Golang services, PostgreSQL databases, and scalable data pipelines.">
+        content="Backend Engineer from Indonesia building Golang services, PostgreSQL databases, and production systems — including ETL and data pipelines (Airflow, dbt, BigQuery, GCS).">
     <meta name="twitter:image" content="https://fatan-portfolio.netlify.app/assets/image/og-image.png">
     <style>
         /* Base */
@@ -38,6 +40,8 @@
             --accent-soft: #d1fae5;
             --border: #e2e8f0;
             --shadow: 0 18px 60px rgba(15, 23, 42, 0.08);
+            --focus-ring: var(--accent-strong);
+            --focus-offset: 3px;
         }
 
         * {
@@ -62,11 +66,44 @@
                 var(--bg);
             color: var(--text);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Skip link — keyboard / screen reader users */
+        .skip-link {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 10000;
+            padding: 0.75rem 1.25rem;
+            background: var(--accent-strong);
+            color: #fff;
+            font-weight: 700;
+            border-radius: 0 0 12px 0;
+            transform: translateY(-120%);
+            transition: transform 0.2s ease;
+        }
+
+        .skip-link:focus,
+        .skip-link:focus-visible {
+            transform: translateY(0);
+            outline: 2px solid #fff;
+            outline-offset: 2px;
         }
 
         a {
             color: inherit;
             text-decoration: none;
+        }
+
+        /* Visible focus for keyboard navigation (does not show on mouse click) */
+        :focus-visible {
+            outline: 2px solid var(--focus-ring);
+            outline-offset: var(--focus-offset);
+        }
+
+        :focus:not(:focus-visible) {
+            outline: none;
         }
 
         img {
@@ -198,11 +235,14 @@
             transition: color 0.2s ease, background 0.2s ease;
         }
 
-        .nav-links a:hover,
-        .nav-links a:focus {
+        .nav-links a:hover {
             background: var(--accent-soft);
             color: var(--accent-strong);
-            outline: none;
+        }
+
+        .nav-links a:focus-visible {
+            background: var(--accent-soft);
+            color: var(--accent-strong);
         }
 
         .nav-toggle {
@@ -217,6 +257,7 @@
             padding: 0.65rem;
             cursor: pointer;
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            color: inherit;
         }
 
         .nav-toggle span {
@@ -287,6 +328,18 @@
             font-size: clamp(2.4rem, 4vw + 1rem, 3.6rem);
             margin-top: 0.8rem;
             animation: heroRise 0.8s ease-out both;
+            text-wrap: balance;
+        }
+
+        /* Keep “— Backend Engineer.” together; avoid “Engineer.” alone on a narrow line */
+        .hero h1 .hero-h1-role {
+            white-space: nowrap;
+        }
+
+        @media (max-width: 420px) {
+            .hero h1 .hero-h1-role {
+                white-space: normal;
+            }
         }
 
         .hero .subhead {
@@ -338,11 +391,32 @@
             color: var(--text);
         }
 
-        .button:hover,
-        .button:focus {
+        .button:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 30px rgba(15, 23, 42, 0.14);
+        }
+
+        .button:focus-visible {
             outline: none;
+            transform: translateY(-2px);
+            box-shadow:
+                0 0 0 3px var(--bg),
+                0 0 0 5px var(--accent-strong),
+                0 12px 30px rgba(15, 23, 42, 0.14);
+        }
+
+        .button.primary:focus-visible {
+            box-shadow:
+                0 0 0 3px var(--bg),
+                0 0 0 5px rgba(255, 255, 255, 0.95),
+                0 12px 35px rgba(13, 148, 136, 0.45);
+        }
+
+        .nav-toggle:focus-visible {
+            outline: none;
+            box-shadow:
+                0 0 0 3px var(--bg),
+                0 0 0 5px var(--accent-strong);
         }
 
         .profile-frame {
@@ -371,6 +445,8 @@
         }
 
         .profile-frame img {
+            position: relative;
+            z-index: 1;
             width: 110%;
             /* sedikit diperbesar biar proporsional */
             height: 110%;
@@ -794,6 +870,11 @@
             color: var(--text);
         }
 
+        .project-card .project-role {
+            text-wrap: pretty;
+            hyphens: manual;
+        }
+
         /* Tombol di bagian bawah card projects saja */
         .project-card .button.secondary {
             width: 100%;
@@ -902,24 +983,65 @@
         }
 
         /* Footer */
-        footer {
+        .site-footer {
             padding: 2rem 0 2.5rem;
             border-top: 1px solid var(--border);
             color: var(--muted);
-            text-align: center;
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
         }
 
-        footer .socials {
+        .site-footer-inner {
             display: flex;
-            gap: 0.7rem;
-            justify-content: center;
-            margin-top: 0.5rem;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.15rem;
+            text-align: center;
         }
 
-        footer a {
+        .site-footer-copy {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .site-footer .socials {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .site-footer .socials a {
             color: var(--accent-strong);
             font-weight: 700;
+            padding: 0.4rem 0.35rem;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            border-radius: 8px;
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            text-underline-offset: 4px;
+            transition: text-decoration-color 0.2s ease, color 0.2s ease;
+        }
+
+        .site-footer .socials a:hover {
+            text-decoration-color: var(--accent-strong);
+        }
+
+        @media (min-width: 640px) {
+            .site-footer-inner {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                text-align: left;
+            }
+
+            .site-footer .socials {
+                justify-content: flex-end;
+            }
         }
 
         /* Reveal animation */
@@ -1081,6 +1203,11 @@
                 border-color: var(--accent-strong);
             }
 
+            .nav-links a:focus-visible {
+                background: transparent;
+                border-color: var(--accent-strong);
+            }
+
             .site-header.nav-open .nav-links {
                 display: flex;
             }
@@ -1195,6 +1322,14 @@
                 transition-duration: 0.01ms !important;
                 scroll-behavior: auto !important;
             }
+
+            .hero h1 {
+                animation: none !important;
+            }
+
+            .skip-link {
+                transition: none;
+            }
         }
     </style>
     <script type="application/ld+json">
@@ -1206,8 +1341,8 @@
           "@id": "https://fatan-portfolio.netlify.app/#person",
           "name": "Muhammad Fatan Najuda Sarwan",
           "alternateName": "Fatan Najuda",
-          "jobTitle": "Backend Engineer & Data Engineer",
-          "description": "Backend & Data Engineer from Indonesia building Golang services, PostgreSQL databases, and scalable data pipelines.",
+          "jobTitle": "Backend Engineer",
+          "description": "Backend Engineer from Indonesia building Golang services, PostgreSQL databases, and production systems — including ETL and data pipelines (Airflow, dbt, BigQuery, GCS).",
           "url": "https://fatan-portfolio.netlify.app/",
           "image": "https://fatan-portfolio.netlify.app/assets/image/FOTO-DIRI.png",
           "sameAs": [
@@ -1237,7 +1372,7 @@
           "@type": "WebPage",
           "@id": "https://fatan-portfolio.netlify.app/#webpage",
           "url": "https://fatan-portfolio.netlify.app/",
-          "name": "Fatan Najuda | Backend & Data Engineer",
+          "name": "Fatan Najuda | Backend Engineer",
           "isPartOf": {
             "@id": "https://fatan-portfolio.netlify.app/#website"
           },
@@ -1258,6 +1393,7 @@
 </head>
 
 <body class="no-js">
+    <a class="skip-link" href="#main">Skip to main content</a>
     <header class="site-header" aria-label="Primary">
         <div class="container nav-shell">
             <a href="#home" class="brand">
@@ -1280,18 +1416,19 @@
         </div>
     </header>
 
-    <main>
+    <main id="main" tabindex="-1">
         <section class="hero container" id="home">
             <div class="hero-details reveal reveal-from-left">
 
                 <span class="hero-tag">
-                    Open to Backend & Data Engineering Roles · Freelance · Mentoring
+                    Open to Backend Engineering Roles · Freelance · Mentoring
                 </span>
 
-                <h1>Hi, I&apos;m Fatan Najuda — Backend &amp; Data Engineer.</h1>
-                <p class="subhead">I build reliable backend services and scalable data pipelines.</p>
-                <p>I have 5+ years of experience building backend microservices, designing PostgreSQL databases, and
-                    orchestrating data workflows that support real-world business operations.</p>
+                <h1>Hi, I&apos;m Fatan Najuda <span class="hero-h1-role">— Backend&nbsp;Engineer.</span></h1>
+                <p class="subhead">I build reliable backend services, production-grade APIs, and data pipelines.</p>
+                <p>I have 5+ years of experience delivering transactional services and scalable architectures on
+                    PostgreSQL, AWS, and GCP — including ETL and orchestrated pipelines (Airflow, dbt, BigQuery, GCS)
+                    that support real-world business operations.</p>
 
                 <div class="cta-group">
                     <a class="button primary" href="#projects">View Projects</a>
@@ -1327,9 +1464,9 @@
                 <span class="eyebrow">About</span>
                 <h2>Human, pragmatic, and detail-oriented.</h2>
                 <p class="section-description">
-                    I'm Muhammad Fatan Najuda Sarwan (Fatan), a Backend & Data Engineer with 5+ years of experience
+                    I'm Muhammad Fatan Najuda Sarwan (Fatan), a Backend Engineer with 5+ years of experience
                     building
-                    scalable backend services, data pipelines, and cloud-native systems. With a Computer Science
+                    scalable backend services, ETL and data pipelines, and cloud-native systems. With a Computer Science
                     background
                     and hands-on work across multiple industries including fintech, agriculture, education, and LMS
                     platforms, I focus on designing reliable architectures,
@@ -1344,9 +1481,8 @@
                     <h3>Story</h3>
                     <p>
                         I began my career as a Backend Engineer, building and scaling production-ready systems using
-                        Golang and modern architecture patterns. Over the years, I expanded into Data Engineering to
-                        work across the full data lifecycle from
-                        ingestion, transformation, and orchestration to analytics ready datasets.
+                        Golang and modern architecture patterns. Over the years, I took on hands-on data work as well —
+                        ETL, orchestration, and analytics-ready datasets across the full data lifecycle.
                         Recently, I've been working on Learning Management Systems (LMS) with AI integration, real-time
                         communication platforms, and multi-database architectures. I also share my knowledge through
                         mentoring and training programs, helping developers grow their skills in backend engineering,
@@ -1405,9 +1541,9 @@
                         <span class="badge">Golang Native</span>
                         <span class="badge">Rust</span>
                         <span class="badge">Java</span>
-                        <span class="badge">Spring Frameworks</span>
+                        <span class="badge">Spring Framework</span>
                         <span class="badge">REST API design</span>
-                        <span class="badge">Gin Frameworks</span>
+                        <span class="badge">Gin Framework</span>
                         <span class="badge">gRPC</span>
                         <span class="badge">WebSocket</span>
                         <span class="badge">SSE</span>
@@ -1434,7 +1570,7 @@
                         <span class="badge">Airflow</span>
                         <span class="badge">BigQuery</span>
                         <span class="badge">Jinja</span>
-                        <span class="badge">Dbt</span>
+                        <span class="badge">dbt</span>
                         <span class="badge">GCS</span>
                     </div>
                 </div>
@@ -1453,7 +1589,7 @@
                         <span class="badge">OpenTelemetry</span>
                         <span class="badge">Jaeger</span>
                         <span class="badge">Google Pub/Sub</span>
-                        <span class="badge">Minio</span>
+                        <span class="badge">MinIO</span>
                         <span class="badge">FCM</span>
                     </div>
                 </div>
@@ -1510,79 +1646,29 @@
                     </div>
                 </article> -->
 
-                <!-- Company Trainer - Backend Specialist -->
+                <!-- Sr. Backend Engineer – Eratani -->
                 <article class="experience-item reveal">
                     <div class="experience-header">
-                        <h3>Company Trainer - Backend Specialist</h3>
-                        <span class="period">Nov 2025 – Saat ini · Selangor, Malaysia</span>
-                    </div>
-                    <div class="experience-section">
-                        <ul>
-                            <li>Designed and delivered training curriculum on modular backend architecture and some many
-                                architecture with Builder pattern for dependency injection, teaching separation of
-                                concerns and maintainability principles, resulting in improved code quality and
-                                architectural understanding across development teams.</li>
-                            <li>Conducted training sessions on system design and development covering scalable
-                                architecture patterns, API design best practices, and integration strategies, enabling
-                                teams to build robust and maintainable backend systems.</li>
-                            <li>Developed training materials and workshops on backend system implementation covering
-                                RESTful API design, microservices architecture, database design patterns, and
-                                performance optimization techniques, improving team capabilities in building
-                                production-ready systems.</li>
-                            <li>Delivered hands-on training on real-time communication systems, and message queue
-                                patterns, teaching teams to build scalable real-time features with low latency and high
-                                concurrency.</li>
-                            <li>Mentored developers on best practices including Test-Driven Development (TDD)
-                                methodology, comprehensive testing strategies, code linting standards, code review
-                                processes, and technical documentation, resulting in 35% reduction in production bugs
-                                across team projects.</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <!-- Data Engineer – Eratani -->
-                <article class="experience-item reveal">
-                    <div class="experience-header">
-                        <h3>Data Engineer – PT. Eratani Teknologi Nusantara</h3>
-                        <span class="period">Aug 2025 – Saat ini · Jakarta, Indonesia</span>
+                        <h3>Sr. Backend Engineer – PT. Eratani Teknologi Nusantara</h3>
+                        <span class="period">Jun 2024 – Saat ini · DKI Jakarta, Indonesia</span>
                     </div>
                     <ul>
-                        <li>Maintenance and orchestrating ETL pipelines using Apache Airflow to automate ingestion from
-                            multiple sources.</li>
-                        <li>Building modular and reusable ingestion builders for Airflow DAGs with custom macros, Jinja
-                            templates, and dynamic schema validation.</li>
-                        <li>Refactoring and optimizing legacy ingestion scripts, reducing execution time and GCS object
-                            size while improving maintainability.</li>
-                        <li>Enhancing DBT transformation layers, including writing reusable macros and UDFs to
-                            streamline business logic transformations.</li>
-                        <li>Collaborating with data analysts and backend teams to design unified schemas and data models
-                            for finance, farmer, and user domains.</li>
-                        <li>Implementing monitoring and alerting mechanisms through Airflow task callbacks and Slack
-                            integration for data quality and job status.</li>
-                        <li>Optimizing GCS and BigQuery usage, ensuring cost efficiency and compliance with
-                            project-level quotas.</li>
-                    </ul>
-                </article>
-
-                <!-- Senior Backend Engineer – Eratani -->
-                <article class="experience-item reveal">
-                    <div class="experience-header">
-                        <h3>Senior Backend Engineer – PT. Eratani Teknologi Nusantara</h3>
-                        <span class="period">Jun 2024 – Aug 2025 · Jakarta, Indonesia</span>
-                    </div>
-                    <ul>
-                        <li>Designed and implemented scalable backend architectures (Hexagonal & Orchestration
-                            patterns), improving system performance by 20%.</li>
-                        <li>Conducted comprehensive code reviews and merge requests, mentoring junior developers and
-                            ensuring high code quality.</li>
-                        <li>Performed impact analysis and technical breakdowns to support stable development during
-                            feature changes.</li>
-                        <li>Refactored and modernized legacy services using SOLID principles, enhancing maintainability
-                            and modularity.</li>
-                        <li>Collaborated cross-functionally with frontend, QA, PMs, and UI/UX teams to deliver features
-                            efficiently.</li>
-                        <li>Developed internal notification systems to alert teams on critical production errors for
-                            faster incident response.</li>
+                        <li>Designed and implemented scalable backend architectures (Hexagonal &amp; orchestration),
+                            improving performance by ~20%.</li>
+                        <li>Conducted code reviews and merge requests, mentoring junior developers to uphold coding
+                            standards and ensure stability.</li>
+                        <li>Analyzed feature changes, performed technical breakdowns, and provided mitigation strategies
+                            to ensure seamless development.</li>
+                        <li>Built internal notification systems for critical production errors, enabling faster incident
+                            response and improved MTTR.</li>
+                        <li>Led production migration from AWS to GCP (compute, data, storage), reducing downtime and
+                            operational cost.</li>
+                        <li>Orchestrated ETL pipelines with Apache Airflow; built reusable DAG patterns with Jinja
+                            templates and dynamic schema validation.</li>
+                        <li>Enhanced dbt transformation layers with reusable macros and UDFs; collaborated on unified
+                            schemas and data models for finance, farmer, and user domains.</li>
+                        <li>Implemented monitoring and alerting via Airflow task callbacks and Slack; optimized GCS and
+                            BigQuery usage for cost efficiency and project-level quotas.</li>
                     </ul>
                 </article>
 
@@ -1590,15 +1676,16 @@
                 <article class="experience-item reveal">
                     <div class="experience-header">
                         <h3>Backend Engineer – PT. Eratani Teknologi Nusantara</h3>
-                        <span class="period">Jun 2023 – Jun 2024 · Jakarta, Indonesia</span>
+                        <span class="period">Jun 2023 – Jun 2024 · DKI Jakarta, Indonesia</span>
                     </div>
                     <ul>
-                        <li>Refactored and modernized legacy codebases by applying SOLID principles, writing unit tests,
-                            and improving modularity, making systems more maintainable.</li>
-                        <li>Worked closely with frontend, QA, PMs, and UI/UX teams to deliver features on time and
-                            ensure smooth integration.</li>
-                        <li>Minimized bugs and production issues through structured error handling and defensive coding
-                            strategies.</li>
+                        <li>Successfully refactored and modernized legacy code to become maintainable, by introducing
+                            SOLID principles, writing unit tests, and improving modularity.</li>
+                        <li>Collaborated cross-functionally with frontend, QA, PMs, and UI/UX teams to deliver systems on
+                            time and with minimal friction.</li>
+                        <li>Reduced bug potential through structured error handling and defensive coding strategies.</li>
+                        <li>Developed internal notification systems to alert teams on critical production errors,
+                            enabling faster incident response.</li>
                     </ul>
                 </article>
 
@@ -1606,54 +1693,31 @@
                 <article class="experience-item reveal">
                     <div class="experience-header">
                         <h3>Development Mentor – GoEscape Academy</h3>
-                        <span class="period">Apr 2025 – Jan 2026 · Indonesia</span>
-                    </div>
-                    <div class="experience-section">
-                        <ul>
-                            <li>Mentored 20+ mentees per batch in backend development using Go, delivering practical
-                                project-based training that bridges theory and real-world application, preparing them
-                                for professional engineering roles.</li>
-                            <li>Trained over 100+ mentees covering microservices architecture, database design patterns,
-                                RESTful API development, and system scalability, resulting in improved technical
-                                capabilities and industry readiness.</li>
-                            <li>Collaborated with fellow mentors to design and review scalable system architectures,
-                                fostering critical thinking, problem-solving skills, and collaborative teamwork among
-                                mentees.</li>
-                            <li>Developed personalized learning paths and effective teaching strategies, conducting
-                                1-on-1 mentoring sessions to accelerate comprehension of complex topics and ensure
-                                continuous progress tracking.</li>
-                            <li>Emphasized industry best practices including clean code principles, SOLID design
-                                patterns, Test-Driven Development (TDD), and code review processes, nurturing a growth
-                                mindset and professional development culture.</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <!-- Freelance Backend Engineer – Astra -->
-                <article class="experience-item reveal">
-                    <div class="experience-header">
-                        <h3>Freelance Backend Engineer – PT. Astra International Tbk.</h3>
-                        <span class="period">Nov 2024 – Jan 2025 · Jakarta, Indonesia</span>
+                        <span class="period">Apr 2025 – Saat ini · Indonesia</span>
                     </div>
                     <ul>
-                        <li>Initiated and developed a new backend ecosystem using Rust, establishing the foundation for
-                            scalable and reliable future systems.</li>
+                        <li>Developed effective teaching strategies to accelerate mentee comprehension of complex topics
+                            such as micro-services, database design, and architecture patterns.</li>
+                        <li>Emphasized industry best practices including clean code principles, SOLID, and test-driven
+                            development, while nurturing a growth mindset.</li>
+                        <li>Conducted personalized 1-on-1 mentoring sessions, ensuring tailored learning paths and
+                            continuous progress tracking for each mentee.</li>
                     </ul>
                 </article>
 
-                <!-- Development Mentor – Aftercoffee Academy -->
+                <!-- Development Mentor – Afteroffice Academy -->
                 <article class="experience-item reveal">
                     <div class="experience-header">
-                        <h3>Development Mentor – Aftercoffee Academy</h3>
+                        <h3>Development Mentor – Afteroffice Academy</h3>
                         <span class="period">May 2024 – Mar 2025 · Indonesia</span>
                     </div>
                     <ul>
-                        <li>Mentored 20+ mentees per batch in backend engineering using Go.</li>
-                        <li>Delivered project-based training to over 100+ mentees, bridging theory and real-world
-                            engineering.</li>
-                        <li>Collaborated to design scalable system architectures and guide mentees in building
-                            production-like systems.</li>
-                        <li>Conducted personalized 1-on-1 mentoring and provided continuous technical assessment.</li>
+                        <li>Mentored 20+ mentees per batch, guiding them in backend development using Go and preparing
+                            them for professional engineering roles.</li>
+                        <li>Delivered practical, project-based training to 100+ mentees, effectively bridging the gap
+                            between theory and real-world application.</li>
+                        <li>Collaborated with fellow mentors to design and review scalable system architectures,
+                            fostering critical thinking and teamwork among mentees.</li>
                     </ul>
                 </article>
 
@@ -1661,34 +1725,23 @@
                 <article class="experience-item reveal">
                     <div class="experience-header">
                         <h3>Backend Engineer – PT. Sentra Inovasi Prima (Yipy)</h3>
-                        <span class="period">Aug 2022 – Feb 2024 · Jakarta, Indonesia</span>
+                        <span class="period">Aug 2022 – Feb 2024 · DKI Jakarta, Indonesia</span>
                     </div>
                     <ul>
-                        <li>Developed and refactored RESTful APIs using Go with MVC structure for maintainability.</li>
-                        <li>Designed and implemented scalable backend architecture to support product scaling and
+                        <li>Developed and refactored RESTful APIs using Go, applying the MVC pattern for clear separation
+                            of concerns and maintainability.</li>
+                        <li>Designed and implemented scalable backend architecture to support application growth and
                             performance.</li>
-                        <li>Migrated a monolithic system to microservices, improving system flexibility and deployment
-                            efficiency.</li>
-                        <li>Managed AWS infrastructure (EC2, RDS, S3) to ensure secure and reliable system operations.
-                        </li>
-                        <li>Performed critical issue troubleshooting and collaborated closely with frontend to maintain
-                            API consistency.</li>
-                    </ul>
-                </article>
-
-                <!-- Academic Consultant – Personal Project -->
-                <article class="experience-item reveal">
-                    <div class="experience-header">
-                        <h3>Academic Consultant – Personal Project</h3>
-                        <span class="period">Jan 2019 – Apr 2024 · Indonesia</span>
-                    </div>
-                    <ul>
-                        <li>Guided university students in selecting research topics and writing structured, impactful
-                            thesis proposals.</li>
-                        <li>Provided full-cycle thesis mentoring including clarity review, technical structure, and
-                            presentation coaching.</li>
-                        <li>Offered consulting for backend development to transform student prototypes into functioning
-                            applications.</li>
+                        <li>Led the migration from a monolithic system to a micro-services based architecture, improving
+                            system flexibility and deployment efficiency.</li>
+                        <li>Managed AWS infrastructure, including EC2, RDS, and S3, ensuring reliable and secure
+                            operations.</li>
+                        <li>Oversaw database design and optimization, ensuring efficient data access and integrity.</li>
+                        <li>Performed in-depth troubleshooting and issue resolution to maintain system stability.</li>
+                        <li>Collaborated closely with frontend developers to ensure seamless and consistent API
+                            integration.</li>
+                        <li>Applied Agile methodologies (Scrum) to manage sprints, tasks, and delivery timelines
+                            effectively.</li>
                     </ul>
                 </article>
 
@@ -1699,38 +1752,60 @@
                         <span class="period">Jun 2022 – Oct 2022 · Tangerang, Indonesia</span>
                     </div>
                     <ul>
-                        <li>Built and maintained RESTful APIs using Spring Boot for government-driven E-SID
-                            applications.</li>
-                        <li>Developed automation systems for Bank BJB for end-of-day, month-end, and year-end processes.
-                        </li>
-                        <li>Led migration from MySQL to PostgreSQL, improving performance, scalability, and consistency.
-                        </li>
+                        <li>Built and maintained RESTful APIs using Spring Boot for the E-SID application under the
+                            Ministry of Transportation, enabling efficient data access and system interoperability.</li>
+                        <li>Developed and supported internal systems at Bank BJB, including automation for end-of-day,
+                            end-of-month, and end-of-year processes.</li>
+                        <li>Led the successful database migration from MySQL to PostgreSQL, improving data performance,
+                            consistency, and scalability.</li>
                     </ul>
                 </article>
 
-                <!-- Junior Backend Developer – Flip ID -->
+                <!-- Junior Backend Developer – Flip -->
                 <article class="experience-item reveal">
                     <div class="experience-header">
-                        <h3>Junior Backend Developer – Flip ID</h3>
-                        <span class="period">Jun 2021 – Oct 2021 · Jakarta, Indonesia</span>
+                        <h3>Junior Backend Developer – PT. Fliptech Lentera Inspirasi Pertiwi (Flip ID)</h3>
+                        <span class="period">Jun 2021 – Oct 2021 · DKI Jakarta, Indonesia</span>
                     </div>
                     <ul>
-                        <li>Developed RESTful API endpoints using Node.js and Express.</li>
-                        <li>Implemented JWT & Bearer Token authentication for secure user access.</li>
-                        <li>Performed API testing and ensured backend reliability using Postman.</li>
+                        <li>Developed RESTful API endpoints using Node.js and Express to support mobile application
+                            functionality.</li>
+                        <li>Implemented secure authentication mechanisms using Bearer Tokens and JWT for user
+                            authorization.</li>
+                        <li>Conducted manual API testing and validation using Postman to ensure accuracy and reliability
+                            of backend responses.</li>
                     </ul>
                 </article>
 
                 <!-- Web Developer – BTN -->
                 <article class="experience-item reveal">
                     <div class="experience-header">
-                        <h3>Web Developer – Bank Tabungan Negara (Persero) Tbk.</h3>
-                        <span class="period">Aug 2020 – Mar 2021 · Jakarta, Indonesia</span>
+                        <h3>Web Developer – PT. Bank Tabungan Negara (Persero) Tbk.</h3>
+                        <span class="period">Aug 2020 – Mar 2021 · DKI Jakarta, Indonesia</span>
                     </div>
                     <ul>
-                        <li>Developed internal attendance + HR applications using PHP (CodeIgniter) and React.</li>
-                        <li>Implemented UI/UX integrations and ensured responsive design.</li>
-                        <li>Monitored and optimized system logs using Unix/Linux to ensure application stability.</li>
+                        <li>Developed internal attendance web applications using CodeIgniter (PHP) for backend and
+                            React.js for frontend, integrating UI/UX designs into functional interfaces.</li>
+                        <li>Conducted regular maintenance and performance checks on internal web apps to ensure optimal
+                            functionality and uptime.</li>
+                        <li>Monitored and updated system logs using Unix/Linux environments to ensure system health and
+                            early detection of issues.</li>
+                    </ul>
+                </article>
+
+                <!-- Academic Consultant – project based -->
+                <article class="experience-item reveal">
+                    <div class="experience-header">
+                        <h3>Academic Consultant, Information Technology (Project Based)</h3>
+                        <span class="period">Jun 2019 – Apr 2024 · Indonesia</span>
+                    </div>
+                    <ul>
+                        <li>Advised students on developing clear, research-oriented thesis topics and on preparing
+                            robust proposal documents.</li>
+                        <li>Guided thesis-writing with emphasis on clarity, logical structure, and alignment with
+                            developments in technology.</li>
+                        <li>Provided technical consulting in backend development for web and Android applications,
+                            supporting the translation of concepts into functional systems.</li>
                     </ul>
                 </article>
 
@@ -1746,6 +1821,43 @@
                 </p>
             </div>
             <div class="project-grid">
+
+                <article class="project-card reveal">
+                    <div class="pill-row">
+                        <span class="pill">Project based</span>
+                        <span class="pill">Microservices</span>
+                    </div>
+                    <h3>PT. Nabati Group (Project Based)</h3>
+                    <p>
+                        <strong>Feb 2026 – May 2026.</strong> Architected, maintained, and operated Go (Fiber)
+                        micro-services across inventory, sales, finance, and master data (MongoDB, Redis, RabbitMQ,
+                        gRPC/protobuf SDKs), integrated SAP HANA/NiFi pipelines, applied multi-tenant PH configuration,
+                        hardened observability, CI/CD, and testing, and partnered with stakeholders for a stable
+                        Philippine rollout.
+                    </p>
+                    <div class="tech-stack">Tech: Go Fiber · MongoDB · Redis · RabbitMQ · gRPC · protobuf · SAP HANA ·
+                        NiFi</div>
+                    <p><strong>Role:</strong> Architecting and operating backend micro-services for rollout.</p>
+                </article>
+
+                <article class="project-card reveal">
+                    <div class="pill-row">
+                        <span class="pill">Project based</span>
+                        <span class="pill">Rust</span>
+                        <span class="pill">Greenfield</span>
+                    </div>
+                    <h3>PT. Astra International Tbk (Project Based)</h3>
+                    <p>
+                        <strong>Nov 2024 – Jan 2025.</strong> Greenfield backend engagement: defined service boundaries
+                        and module layout, then implemented core services in Rust from scratch — prioritizing safety,
+                        performance, and maintainability. Delivered a foundation the organization could extend with
+                        confidence: clear structure, repeatable build and test workflows, and a path toward production
+                        hardening.
+                    </p>
+                    <div class="tech-stack">Tech: Rust · Cargo</div>
+                    <p class="project-role"><strong>Role:</strong> End-to-end ownership — architecture, Rust
+                        implementation, and rollout readiness.</p>
+                </article>
 
                 <article class="project-card reveal">
                     <div class="pill-row">
@@ -1815,13 +1927,13 @@
                         <span class="pill">Backend</span>
                         <span class="pill">Finance</span>
                     </div>
-                    <h3>Financial RAB Genarator Service</h3>
+                    <h3>Financial RAB Generator Service</h3>
                     <p>
                         Backend service that generates project-wide RAB (budget plans), supporting scenarios where
-                        a single project contains multiple farmers. Generation data and securely stores
+                        a single project contains multiple farmers. Generates data and securely stores
                         files in S3 for finance operations.
                     </p>
-                    <div class="tech-stack">Tech: Golang · Gin Frameworks · PostgreSQL</div>
+                    <div class="tech-stack">Tech: Golang · Gin Framework · PostgreSQL</div>
                     <p><strong>Role:</strong> Backend engineer for system design and implementation.</p>
                 </article>
 
@@ -1866,7 +1978,7 @@
                         direct bank payment gateways, SNAP BI, and Odoo. Built to ensure reliable,
                         secure, and consistent communication across finance and ERP workflows.
                     </p>
-                    <div class="tech-stack">Tech: Golang Native · Gin Frameworks · PostgreSQL · Redis</div>
+                    <div class="tech-stack">Tech: Golang Native · Gin Framework · PostgreSQL · Redis</div>
                     <p><strong>Role:</strong> Backend engineer handling system architecture and API integration.</p>
                 </article>
 
@@ -1882,7 +1994,7 @@
                         real-time dashboards, performance tracking, and decision-making across agricultural operations.
                     </p>
                     <div class="tech-stack">Tech: Python · Airflow · BigQuery · dbt · GCS</div>
-                    <p><strong>Role:</strong> Data Engineer owning pipeline orchestration, data modeling, validation,
+                    <p><strong>Role:</strong> Backend engineer owning pipeline orchestration, data modeling, validation,
                         and SLAs.</p>
                 </article>
 
@@ -1945,13 +2057,15 @@
         </section> -->
     </main>
 
-    <footer>
-        <div>© <span data-year></span> Muhammad Fatan Najuda Sarwan. All rights reserved.</div>
-        <div class="socials" aria-label="Social links">
-            <a href="mailto:najudaf@gmail.com">Email</a>
-            <a href="https://github.com/fnajudas" target="_blank" rel="noopener">GitHub</a>
-            <a href="https://www.linkedin.com/in/muhammad-fatan-najuda-sarwan/" target="_blank"
-                rel="noopener">LinkedIn</a>
+    <footer class="site-footer">
+        <div class="container site-footer-inner">
+            <p class="site-footer-copy">© <span data-year></span> Muhammad Fatan Najuda Sarwan. All rights reserved.</p>
+            <nav class="socials" aria-label="Social links">
+                <a href="mailto:najudaf@gmail.com">Email</a>
+                <a href="https://github.com/fnajudas" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/muhammad-fatan-najuda-sarwan/" target="_blank"
+                    rel="noopener noreferrer">LinkedIn</a>
+            </nav>
         </div>
     </footer>
 
@@ -1971,7 +2085,15 @@
         setHeaderState();
         window.addEventListener('scroll', setHeaderState, { passive: true });
 
-        if (navToggle && navLinks) {
+        const mainEl = document.getElementById('main');
+        const skipLink = document.querySelector('.skip-link');
+        if (skipLink && mainEl) {
+            skipLink.addEventListener('click', () => {
+                mainEl.focus({ preventScroll: false });
+            });
+        }
+
+        if (navToggle && navLinks && header) {
             navToggle.addEventListener('click', () => {
                 const isOpen = header.classList.toggle('nav-open');
                 navToggle.setAttribute('aria-expanded', String(isOpen));
@@ -1981,6 +2103,12 @@
                     header.classList.remove('nav-open');
                     navToggle.setAttribute('aria-expanded', 'false');
                 });
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key !== 'Escape' || !header.classList.contains('nav-open')) return;
+                header.classList.remove('nav-open');
+                navToggle.setAttribute('aria-expanded', 'false');
+                navToggle.focus();
             });
         }
 
