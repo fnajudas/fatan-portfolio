@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#ebeff3">
+    <meta name="theme-color" content="#f3f6fb">
     <meta name="color-scheme" content="light">
     <title>Fatan Najuda | Backend Engineer</title>
     <meta name="description"
@@ -31,25 +31,25 @@
     <style>
         /* Base */
         :root {
-            /* Neutral canvas + restrained teal — minimal, readable, “systems” feel */
-            --bg: #ebeff3;
+            /* Clean professional palette: slate + royal blue */
+            --bg: #f3f6fb;
             --panel: #ffffff;
-            --surface-muted: #f4f6f9;
-            --text: #12151a;
-            --muted: #5c6570;
-            --accent: #0b6b64;
-            --accent-strong: #084942;
-            --accent-soft: #dfecea;
-            --accent-rgb: 11, 107, 100;
-            --border: #d5dce3;
-            --shadow: 0 14px 44px rgba(17, 24, 39, 0.07);
-            --shadow-accent: 0 10px 28px rgba(var(--accent-rgb), 0.18);
+            --surface-muted: #eef2ff;
+            --text: #0f172a;
+            --muted: #475569;
+            --accent: #1e40af;
+            --accent-strong: #1e3a8a;
+            --accent-soft: #dbeafe;
+            --accent-rgb: 30, 64, 175;
+            --border: #d7e0eb;
+            --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+            --shadow-accent: 0 12px 28px rgba(var(--accent-rgb), 0.22);
             --focus-ring: var(--accent-strong);
             --focus-offset: 3px;
             --container-max: 1100px;
             --gutter-x: clamp(1rem, 4vw, 1.75rem);
-            --section-pad-y: clamp(3.25rem, 6.5vw, 4.75rem);
-            --section-pad-y-lg: clamp(4.5rem, 8vw, 5.75rem);
+            --section-pad-y: clamp(2.5rem, 5.2vw, 3.7rem);
+            --section-pad-y-lg: clamp(3.1rem, 6.2vw, 4.6rem);
             --content-measure: 42rem;
             --anchor-offset: 5.5rem;
         }
@@ -71,8 +71,8 @@
             margin: 0;
             font-family: "Segoe UI", "Helvetica Neue", system-ui, -apple-system, sans-serif;
             background:
-                radial-gradient(ellipse 100% 70% at 12% -8%, rgba(var(--accent-rgb), 0.07), transparent 52%),
-                radial-gradient(ellipse 90% 55% at 100% 0%, rgba(18, 21, 26, 0.04), transparent 48%),
+                radial-gradient(ellipse 120% 80% at 0% -14%, rgba(var(--accent-rgb), 0.1), transparent 56%),
+                radial-gradient(ellipse 90% 62% at 100% 2%, rgba(15, 23, 42, 0.04), transparent 48%),
                 var(--bg);
             color: var(--text);
             line-height: 1.6;
@@ -175,15 +175,16 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(12px);
+            background: rgba(245, 247, 255, 0.82);
+            backdrop-filter: blur(14px);
             transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
             border-bottom: 1px solid transparent;
         }
 
         .site-header.scrolled {
-            background: rgba(255, 255, 255, 0.94);
+            background: rgba(255, 255, 255, 0.96);
             border-color: var(--border);
-            box-shadow: 0 10px 28px rgba(17, 24, 39, 0.05);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
         }
 
         .nav-shell {
@@ -263,6 +264,12 @@
             color: var(--accent-strong);
         }
 
+        .nav-links a[aria-current="page"] {
+            color: var(--accent-strong);
+            font-weight: 800;
+            background: rgba(var(--accent-rgb), 0.1);
+        }
+
         .nav-toggle {
             width: 44px;
             height: 44px;
@@ -326,7 +333,7 @@
             grid-template-columns: 1fr;
             gap: clamp(2rem, 5vw, 3rem);
             align-items: center;
-            padding-block: clamp(3.5rem, 9vw, 5rem);
+            padding-block: clamp(2.6rem, 6.8vw, 4.1rem);
             padding-inline: 0;
         }
 
@@ -345,7 +352,12 @@
 
         /* Ruang tetap: cegah subhead “melompat” saat typewriter mengetik/menghapus */
         .hero-headline-block {
-            min-height: clamp(9rem, 26vw, 12.5rem);
+            height: clamp(6.9rem, 17vw, 9.4rem);
+            width: 100%;
+            overflow: hidden;
+            padding-right: 0.35em;
+            display: grid;
+            align-content: start;
         }
 
         .hero-typewriter-h1 {
@@ -353,12 +365,14 @@
             margin: 0;
             animation: heroRise 0.8s ease-out both;
             text-wrap: wrap;
+            padding-right: 0.2em;
         }
 
         /* Bagian belakang satu blok tidak putus → titik & kursor satu baris */
         .hero-typewriter-h1 .typewriter-b {
             white-space: nowrap;
             display: inline;
+            padding-right: 0.15em;
         }
 
         .hero-typewriter-h1 .hero-h1-role {
@@ -408,7 +422,7 @@
             line-height: 1.35;
             max-width: min(650px, 100%);
             letter-spacing: -0.01em;
-            min-height: calc(1.35em * 2);
+            min-height: 0;
         }
 
         .hero-cta-wrap {
@@ -435,6 +449,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.45rem;
+            min-height: 44px;
             padding: 0.85rem 1.3rem;
             border-radius: 12px;
             border: 1px solid var(--border);
@@ -461,8 +476,9 @@
         }
 
         .button.secondary {
-            background: transparent;
+            background: rgba(var(--accent-rgb), 0.06);
             color: var(--text);
+            border-color: rgba(var(--accent-rgb), 0.26);
         }
 
         .button:hover {
@@ -501,7 +517,7 @@
             border-radius: 50%;
             overflow: hidden;
             background: var(--accent-soft);
-            box-shadow: 0 14px 40px rgba(17, 24, 39, 0.06);
+            box-shadow: 0 18px 46px rgba(15, 23, 42, 0.12);
             display: grid;
             place-items: center;
             position: relative;
@@ -530,7 +546,9 @@
 
         .hero-details {
             display: grid;
-            gap: clamp(1rem, 2.2vw, 1.35rem);
+            gap: clamp(0.75rem, 1.8vw, 1.05rem);
+            width: 100%;
+            min-width: 0;
         }
 
         .hero-details>* {
@@ -554,7 +572,7 @@
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 1rem 1.1rem;
-            box-shadow: 0 8px 24px rgba(17, 24, 39, 0.06);
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
         }
 
         .stat-number {
@@ -569,7 +587,7 @@
 
         /* Section headers */
         .section-header {
-            margin-bottom: clamp(1.75rem, 4vw, 2.35rem);
+            margin-bottom: clamp(1.2rem, 2.6vw, 1.75rem);
         }
 
         .section-header h2 {
@@ -578,6 +596,10 @@
             margin: 0 0 0.45rem;
             letter-spacing: -0.03em;
             line-height: 1.22;
+        }
+
+        main>section.container:not(.hero) {
+            border-top: 1px solid rgba(var(--accent-rgb), 0.1);
         }
 
         .eyebrow {
@@ -603,73 +625,157 @@
         }
 
         /* About */
-        .about-grid {
-            display: grid;
-            gap: 1.25rem;
-            grid-template-columns: 1fr;
+        #about .section-header,
+        #about .section-description {
+            max-width: 100%;
         }
 
-        .about-card {
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+            align-items: start;
+        }
+
+        .about-copy {
             background: var(--panel);
             border: 1px solid var(--border);
             border-radius: 14px;
-            padding: 1.65rem 1.85rem;
-            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            padding: clamp(1.2rem, 3vw, 1.9rem);
+            box-shadow: 0 10px 26px rgba(15, 23, 42, 0.06);
         }
 
-        .about-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow);
-            border-color: rgba(var(--accent-rgb), 0.32);
+        .about-copy p {
+            margin: 0 0 1rem;
+            color: #3f4e66;
+            line-height: 1.68;
         }
 
-        .about-card h3 {
-            margin: 0 0 0.7rem;
-            font-size: 1.05rem;
+        .about-copy p:last-child {
+            margin-bottom: 0;
         }
 
-        .about-card p {
-            margin: 0;
-            color: var(--muted);
+        .about-copy .about-intro {
+            font-size: clamp(1.02rem, 1.35vw, 1.12rem);
             line-height: 1.7;
+            color: #334155;
         }
 
-        .about-card ul {
-            margin: 0.4rem 0 0;
-            padding-left: 1.2rem;
+        .about-keywords {
+            color: var(--text);
+            font-weight: 700;
         }
 
-        .about-card li {
-            margin-bottom: 0.4rem;
+        .about-metrics {
+            margin-top: 1.2rem;
+            display: grid;
+            gap: 0.75rem;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            padding-top: 0.9rem;
+            border-top: 1px solid rgba(var(--accent-rgb), 0.14);
         }
 
-        .about-card ul {
-            list-style: none;
-            padding: 0;
+        .about-metric {
+            background: var(--surface-muted);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-align: center;
+            padding: 0.85rem 0.7rem;
+            min-height: 104px;
+            display: grid;
+            align-content: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
-        .about-card li {
-            position: relative;
-            padding-left: 1.6rem;
-            margin-bottom: 0.7rem;
+        .about-metric:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+            border-color: rgba(var(--accent-rgb), 0.28);
+        }
+
+        .about-metric strong {
+            display: block;
+            font-size: 1.5rem;
+            line-height: 1.1;
+            color: var(--accent-strong);
+            margin-bottom: 0.3rem;
+        }
+
+        .about-metric span {
             color: var(--muted);
+            font-size: 0.9rem;
+            font-weight: 600;
         }
 
-        .about-card li::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 0.55rem;
-            width: 10px;
-            height: 10px;
+        .about-json-card {
+            width: 100%;
+            max-width: 520px;
+            align-self: center;
+            justify-self: center;
+            background: rgba(255, 255, 255, 0.62);
+            border: 1px solid rgba(255, 255, 255, 0.72);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 16px 36px rgba(15, 23, 42, 0.11);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .about-json-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.85rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.75);
+            background: linear-gradient(90deg, rgba(var(--accent-rgb), 0.12), rgba(255, 255, 255, 0.22));
+            padding: 0.7rem 0.95rem;
+        }
+
+        .about-json-dots {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.32rem;
+        }
+
+        .about-json-dots i {
+            width: 9px;
+            height: 9px;
             border-radius: 50%;
-            background: var(--accent);
-            box-shadow: 0 4px 10px rgba(var(--accent-rgb), 0.28);
-            transition: transform 0.2s ease;
+            display: inline-block;
         }
 
-        .about-card li:hover::before {
-            transform: scale(1.2);
+        .about-json-dots i:nth-child(1) {
+            background: #ef4444;
+        }
+
+        .about-json-dots i:nth-child(2) {
+            background: #f59e0b;
+        }
+
+        .about-json-dots i:nth-child(3) {
+            background: #22c55e;
+        }
+
+        .about-json-file {
+            color: var(--muted);
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .about-json-body {
+            margin: 0;
+            padding: 1rem;
+            overflow: hidden;
+            background:
+                linear-gradient(180deg, rgba(var(--accent-rgb), 0.08), rgba(255, 255, 255, 0.1) 45%),
+                rgba(255, 255, 255, 0.28);
+            font-family: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.83rem;
+            line-height: 1.68;
+            color: #1e293b;
+            white-space: pre-wrap;
+            word-break: break-word;
         }
 
         /* Skills */
@@ -684,7 +790,7 @@
             border: 1px solid var(--border);
             border-radius: 14px;
             padding: 1.6rem 1.8rem;
-            box-shadow: 0 10px 32px rgba(17, 24, 39, 0.06);
+            box-shadow: 0 10px 32px rgba(15, 23, 42, 0.08);
             transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
 
@@ -732,19 +838,22 @@
 
         .badge-row {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.7rem 0.6rem;
             flex-wrap: wrap;
+            align-items: flex-start;
         }
 
         .badge {
             display: inline-flex;
-            padding: 0.4rem 0.75rem;
+            align-items: center;
+            padding: 0.5rem 0.9rem;
             border-radius: 999px;
             border: 1px solid var(--border);
             background: var(--surface-muted);
             color: var(--text);
             font-weight: 700;
             font-size: 0.9rem;
+            line-height: 1.35;
             transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
@@ -779,7 +888,7 @@
             background: var(--panel);
             border-radius: 14px;
             border: 1px solid var(--border);
-            box-shadow: 0 10px 32px rgba(17, 24, 39, 0.06);
+            box-shadow: 0 10px 32px rgba(15, 23, 42, 0.08);
             transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
@@ -867,6 +976,22 @@
             left: 12px;
             box-shadow: 0 0 0 5px rgba(var(--accent-rgb), 0.15);
             z-index: 5;
+            animation: timelineBlink 1.25s ease-in-out infinite;
+        }
+
+        @keyframes timelineBlink {
+            0%,
+            100% {
+                transform: translateX(-50%) scale(1);
+                opacity: 1;
+                box-shadow: 0 0 0 5px rgba(var(--accent-rgb), 0.15);
+            }
+
+            50% {
+                transform: translateX(-50%) scale(1.18);
+                opacity: 0.6;
+                box-shadow: 0 0 0 9px rgba(var(--accent-rgb), 0.08);
+            }
         }
 
         .experience-header {
@@ -901,7 +1026,7 @@
             border: 1px solid var(--border);
             border-radius: 14px;
             padding: 1.4rem 1.8rem 1.7rem;
-            box-shadow: 0 10px 32px rgba(17, 24, 39, 0.06);
+            box-shadow: 0 10px 32px rgba(15, 23, 42, 0.08);
             transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
 
@@ -961,7 +1086,7 @@
 
         .pill {
             padding: 0.38rem 0.8rem;
-            background: var(--accent-soft);
+            background: rgba(var(--accent-rgb), 0.1);
             color: var(--accent-strong);
             border-radius: 999px;
             font-weight: 700;
@@ -1111,6 +1236,54 @@
             }
         }
 
+        .reading-progress {
+            position: absolute;
+            inset: auto 0 0 0;
+            height: 3px;
+            background: rgba(var(--accent-rgb), 0.14);
+            overflow: hidden;
+        }
+
+        .reading-progress>span {
+            display: block;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+            transition: width 0.15s ease-out;
+        }
+
+        .back-to-top {
+            position: fixed;
+            right: 1rem;
+            bottom: 1rem;
+            z-index: 950;
+            width: 46px;
+            height: 46px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: var(--panel);
+            color: var(--accent-strong);
+            box-shadow: 0 12px 30px rgba(17, 24, 39, 0.14);
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 34px rgba(17, 24, 39, 0.18);
+        }
+
+        .back-to-top.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
         /* Reveal animation */
         .js .reveal {
             opacity: 0;
@@ -1143,21 +1316,20 @@
             transform: translateX(0) scale(1);
         }
 
-        .about-card.reveal:nth-child(1),
+        .about-layout .reveal:nth-child(1),
         .skill-card.reveal:nth-child(1),
         .project-card.reveal:nth-child(1),
         .experience-item.reveal:nth-child(1) {
             transition-delay: 0.05s;
         }
 
-        .about-card.reveal:nth-child(2),
+        .about-layout .reveal:nth-child(2),
         .skill-card.reveal:nth-child(2),
         .project-card.reveal:nth-child(2),
         .experience-item.reveal:nth-child(2) {
             transition-delay: 0.12s;
         }
 
-        .about-card.reveal:nth-child(3),
         .skill-card.reveal:nth-child(3),
         .project-card.reveal:nth-child(3),
         .experience-item.reveal:nth-child(3) {
@@ -1172,7 +1344,7 @@
         /* responsive tweak: stack & center key sections on small screens */
         @media (max-width: 720px) {
             section {
-                padding-block: clamp(2.85rem, 8vw, 3.5rem);
+                padding-block: clamp(2.2rem, 6.6vw, 2.9rem);
             }
 
             .hero {
@@ -1204,6 +1376,10 @@
                 flex-direction: column;
                 gap: 1.2rem;
             }
+
+            .about-metrics {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* responsive tweak: tighter spacing on very small screens */
@@ -1213,7 +1389,7 @@
             }
 
             section {
-                padding-block: clamp(2.6rem, 7vw, 3rem);
+                padding-block: clamp(1.95rem, 5.8vw, 2.5rem);
             }
 
             .cta-group {
@@ -1270,6 +1446,11 @@
                 border-color: var(--accent-strong);
             }
 
+            .nav-links a[aria-current="page"] {
+                background: transparent;
+                border-bottom: 2px solid var(--accent-strong);
+            }
+
             .nav-links a:focus-visible {
                 background: transparent;
                 border-color: var(--accent-strong);
@@ -1286,9 +1467,13 @@
             }
 
             .hero {
-                grid-template-columns: 1.1fr 0.9fr;
+                grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
                 gap: clamp(2.5rem, 4vw, 3.25rem);
-                padding-block: clamp(4.5rem, 10vw, 6rem);
+                padding-block: clamp(3.4rem, 7.5vw, 4.8rem);
+            }
+
+            .hero-details {
+                max-width: 650px;
             }
 
             .profile-frame {
@@ -1304,8 +1489,9 @@
             }
 
 
-            .about-grid {
-                grid-template-columns: repeat(3, 1fr);
+            .about-layout {
+                grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+                gap: 1.45rem;
             }
 
             .contact-grid {
@@ -1399,6 +1585,10 @@
                 opacity: 0.9;
             }
 
+            .timeline::after {
+                animation: none !important;
+            }
+
             .skip-link {
                 transition: none;
             }
@@ -1473,10 +1663,10 @@
                 <span>Fatan Najuda — Engineering Portfolio</span>
             </a>
             <nav aria-label="Main navigation">
-                <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav-links">
                     <span></span><span></span><span></span>
                 </button>
-                <ul class="nav-links">
+                <ul class="nav-links" id="main-nav-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#skills">Skills</a></li>
@@ -1486,6 +1676,7 @@
                 </ul>
             </nav>
         </div>
+        <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
     </header>
 
     <main id="main" tabindex="-1">
@@ -1498,7 +1689,7 @@
 
                 <div class="hero-headline-block">
                     <h1 class="hero-typewriter-h1" id="hero-typewriter-heading"
-                        aria-label="Hi, I'm Fatan Najuda — Backend Engineer.">
+                        aria-label="Hi, I'm Fatan Najuda — Backend Engineer">
                         <span id="typewriter-root" aria-hidden="true"><span id="typewriter-a" class="typewriter-a"></span><span
                                 id="typewriter-b" class="typewriter-b"></span></span>
                     </h1>
@@ -1526,7 +1717,7 @@
                     </div>
                     <div class="stat-box">
                         <div class="stat-number">Data</div>
-                        <div class="stat-label">Pipelines &amp; analytics</div>
+                        <div class="stat-label">Pipelines&nbsp;&amp;&nbsp;analytics</div>
                     </div>
                 </div>
             </div>
@@ -1542,69 +1733,60 @@
         <section class="container" id="about">
             <div class="section-header reveal">
                 <span class="eyebrow">About</span>
-                <h2>Human, pragmatic, and detail-oriented.</h2>
+                <h2>Building reliable systems with practical engineering.</h2>
                 <p class="section-description">
-                    I'm Muhammad Fatan Najuda Sarwan (Fatan), a Backend Engineer with 5+ years of experience
-                    building
-                    scalable backend services, ETL and data pipelines, and cloud-native systems. With a Computer Science
-                    background
-                    and hands-on work across multiple industries including fintech, agriculture, education, and LMS
-                    platforms, I focus on designing reliable architectures,
-                    optimizing
-                    workflows, and delivering solutions that help businesses operate efficiently and make data-driven
-                    decisions. I also mentor developers and deliver training programs to help teams improve their
-                    technical capabilities.
+                    I help teams turn complex business requirements into backend systems that are stable, maintainable,
+                    and ready to scale.
                 </p>
             </div>
-            <div class="about-grid">
-                <article class="about-card reveal">
-                    <h3>Story</h3>
-                    <p>
-                        I began my career as a Backend Engineer, building and scaling production-ready systems using
-                        Golang and modern architecture patterns. Over the years, I took on hands-on data work as well —
-                        ETL, orchestration, and analytics-ready datasets across the full data lifecycle.
-                        Recently, I've been working on Learning Management Systems (LMS) with AI integration, real-time
-                        communication platforms, and multi-database architectures. I also share my knowledge through
-                        mentoring and training programs, helping developers grow their skills in backend engineering,
-                        system design, and best practices.
-                        Today, I focus on creating reliable backend services, scalable data pipelines, and developer
-                        tooling that empower
-                        teams to ship faster, make informed decisions, and operate with confidence.
+            <div class="about-layout">
+                <article class="about-copy reveal reveal-from-left">
+                    <p class="about-intro">
+                        I am <span class="about-keywords">Muhammad Fatan Najuda Sarwan</span>, a backend engineer with
+                        5+ years of experience delivering production systems in fintech, agriculture, education, and LMS
+                        products.
                     </p>
-                </article>
-                <article class="about-card reveal">
-                    <h3>What I do</h3>
-                    <ul>
-                        <li>Architect and develop backend services using Golang with clean, maintainable design
-                            patterns including Layered Architecture, Builder pattern, and modular systems.</li>
-                        <li>Build real-time communication systems using LiveKit, WebSocket, and SSE for low-latency,
-                            high-concurrency applications.</li>
-                        <li>Design and implement AI-integrated systems for automated content generation, question
-                            generation, and personalized learning paths.</li>
-                        <li>Optimize multi-database infrastructures (PostgreSQL, MongoDB, Redis, Elasticsearch) and
-                            craft efficient queries for complex operations.</li>
-                        <li>Build and orchestrate end-to-end data pipelines using Airflow, BigQuery, dbt, and cloud
-                            storage.</li>
-                        <li>Develop code generation tools and automation to reduce boilerplate and accelerate
-                            development.</li>
-                        <li>Mentor developers and deliver training programs on backend architecture, system design, and
-                            industry best practices.</li>
-                        <li>Collaborate across engineering, product, and data teams to deliver high-impact features.
-                        </li>
-                    </ul>
-                </article>
-                <article class="about-card reveal">
-                    <h3>How I work</h3>
                     <p>
-                        I work by combining clarity, structure, and collaboration—refining requirements,
-                        designing system architectures, validating solutions with QA, and documenting clear
-                        processes. I prioritize clean abstractions, reliable delivery, and continuous improvement
-                        to ensure every system becomes more stable and predictable over time. I practice TDD,
-                        comprehensive testing, code linting, and thorough documentation to reduce production bugs and
-                        improve code quality. When mentoring, I focus on hands-on learning, personalized guidance, and
-                        real-world system design to help developers become industry-ready engineers.
+                        I specialize in <span class="about-keywords">Golang services</span>,
+                        <span class="about-keywords">data pipelines</span>, and
+                        <span class="about-keywords">cloud-native architecture</span>. I enjoy designing APIs, data
+                        models, and workflows that are easy to evolve as products grow.
                     </p>
+                    <p>
+                        Beyond implementation, I support teams through code review, mentoring, and technical training so
+                        delivery quality stays high and production stays predictable.
+                    </p>
+                    <div class="about-metrics" aria-label="Career highlights">
+                        <div class="about-metric"><strong>5+</strong><span>Years Experience</span></div>
+                        <div class="about-metric"><strong>20%+</strong><span>System Performance Gains</span></div>
+                        <div class="about-metric"><strong>4 Domains</strong><span>Cross-Industry Delivery</span></div>
+                        <div class="about-metric"><strong>Mentoring</strong><span>Technical Coaching</span></div>
+                    </div>
                 </article>
+                <aside class="about-json-card reveal reveal-from-right" aria-label="About profile in JSON">
+                    <div class="about-json-header">
+                        <span class="about-json-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                        <span class="about-json-file">about-profile.json</span>
+                    </div>
+                    <pre class="about-json-body">{
+  "name": "Muhammad Fatan Najuda Sarwan",
+  "role": [
+    "Senior Backend Engineer",
+    "Data Engineer",
+    "Technical Mentor",
+    "Product Engineer"
+  ],
+  "location": "Indonesia",
+  "experience": "5+ years",
+  "focus": [
+    "Golang backend services",
+    "Data engineering (Airflow, dbt, BigQuery)",
+    "Cloud systems (AWS, GCP)",
+    "Mentoring and technical training"
+  ],
+  "availability": "Open for backend roles and collaborations"
+}</pre>
+                </aside>
             </div>
         </section>
 
@@ -2148,6 +2330,8 @@
         </style>
     </noscript>
 
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+
     <footer class="site-footer">
         <div class="container site-footer-inner">
             <p class="site-footer-copy">© <span data-year></span> Muhammad Fatan Najuda Sarwan. All rights reserved.</p>
@@ -2178,6 +2362,42 @@
 
         const mainEl = document.getElementById('main');
         const skipLink = document.querySelector('.skip-link');
+        const progressBar = document.getElementById('reading-progress-bar');
+        const backToTopButton = document.querySelector('.back-to-top');
+        const sectionLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+
+        const updateReadingProgress = () => {
+            if (!progressBar) return;
+            const viewport = window.innerHeight;
+            const fullHeight = document.documentElement.scrollHeight - viewport;
+            const ratio = fullHeight > 0 ? Math.min(1, Math.max(0, window.scrollY / fullHeight)) : 0;
+            progressBar.style.width = `${Math.round(ratio * 100)}%`;
+        };
+
+        const updateBackToTopState = () => {
+            if (!backToTopButton) return;
+            backToTopButton.classList.toggle('is-visible', window.scrollY > 520);
+        };
+
+        const setActiveNavLink = () => {
+            if (!sectionLinks.length) return;
+            let activeSectionId = 'home';
+            sectionLinks.forEach((link) => {
+                const targetId = link.getAttribute('href')?.slice(1);
+                if (!targetId) return;
+                const section = document.getElementById(targetId);
+                if (!section) return;
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 140 && rect.bottom >= 140) {
+                    activeSectionId = targetId;
+                }
+            });
+            sectionLinks.forEach((link) => {
+                const isActive = link.getAttribute('href') === `#${activeSectionId}`;
+                link.setAttribute('aria-current', isActive ? 'page' : 'false');
+            });
+        };
+
         if (skipLink && mainEl) {
             skipLink.addEventListener('click', () => {
                 mainEl.focus({ preventScroll: false });
@@ -2201,11 +2421,25 @@
                 navToggle.setAttribute('aria-expanded', 'false');
                 navToggle.focus();
             });
+            document.addEventListener('click', (e) => {
+                const target = e.target;
+                if (!(target instanceof Element)) return;
+                if (!header.classList.contains('nav-open')) return;
+                if (target.closest('.site-header')) return;
+                header.classList.remove('nav-open');
+                navToggle.setAttribute('aria-expanded', 'false');
+            });
         }
 
         const yearEl = document.querySelector('[data-year]');
         if (yearEl) {
             yearEl.textContent = new Date().getFullYear();
+        }
+
+        if (backToTopButton) {
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
         }
 
         const observer = new IntersectionObserver(
@@ -2221,6 +2455,15 @@
         );
 
         document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+        updateReadingProgress();
+        updateBackToTopState();
+        setActiveNavLink();
+        window.addEventListener('scroll', () => {
+            updateReadingProgress();
+            updateBackToTopState();
+            setActiveNavLink();
+        }, { passive: true });
+        window.addEventListener('resize', setActiveNavLink);
 
         (function typewriterHero() {
             const root = document.getElementById('typewriter-root');
@@ -2229,14 +2472,19 @@
             if (!root || !elA || !elB) return;
 
             const PART_A = "Hi, I'm Fatan Najuda ";
-            const PART_B = "— Backend\u00A0Engineer.";
-            const fullPlain = PART_A + PART_B;
-            const fullHtmlB = "<span class=\"hero-h1-role\">— Backend&nbsp;Engineer.</span>";
+            const ROLE_PREFIX = "— ";
+            const roles = [
+                "Backend\u00A0Engineer",
+                "Data\u00A0Engineer",
+                "Technical\u00A0Mentor"
+            ];
+            const firstRole = ROLE_PREFIX + roles[0];
+            const fullPlain = PART_A + firstRole;
 
             const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             if (reduced) {
                 elA.textContent = PART_A;
-                elB.innerHTML = fullHtmlB;
+                elB.textContent = firstRole;
                 elB.classList.add('typewriter-cursor--idle');
                 return;
             }
@@ -2249,6 +2497,8 @@
 
             let i = 0;
             const lenA = PART_A.length;
+            let roleIndex = 0;
+            let roleCharIndex = 0;
 
             root.classList.add('is-typewriter-active');
             elB.classList.add('is-typewriter-active');
@@ -2256,8 +2506,8 @@
             function runType() {
                 if (i >= fullPlain.length) {
                     elA.textContent = PART_A;
-                    elB.innerHTML = fullHtmlB;
-                    window.setTimeout(startDelete, pauseAfterType);
+                    elB.textContent = firstRole;
+                    window.setTimeout(deleteRole, pauseAfterType);
                     return;
                 }
                 if (i < lenA) {
@@ -2271,29 +2521,28 @@
                 window.setTimeout(runType, msType);
             }
 
-            function startDelete() {
-                elA.textContent = PART_A;
-                elB.textContent = PART_B;
-                runDelete();
-            }
-
-            function runDelete() {
-                let tb = elB.textContent;
-                let ta = elA.textContent;
-                if (tb.length > 0) {
-                    elB.textContent = tb.slice(0, -1);
-                } else if (ta.length > 0) {
-                    elA.textContent = ta.slice(0, -1);
-                } else {
-                    window.setTimeout(() => {
-                        i = 0;
-                        elA.textContent = '';
-                        elB.textContent = '';
-                        runType();
-                    }, pauseAfterDelete);
+            function deleteRole() {
+                const currentRole = elB.textContent || '';
+                if (currentRole.length > ROLE_PREFIX.length) {
+                    elB.textContent = currentRole.slice(0, -1);
+                    window.setTimeout(deleteRole, msDelete);
                     return;
                 }
-                window.setTimeout(runDelete, msDelete);
+                roleIndex = (roleIndex + 1) % roles.length;
+                roleCharIndex = 0;
+                window.setTimeout(typeRole, pauseAfterDelete);
+            }
+
+            function typeRole() {
+                const nextRole = roles[roleIndex];
+                if (roleCharIndex >= nextRole.length) {
+                    elB.textContent = ROLE_PREFIX + nextRole;
+                    window.setTimeout(deleteRole, pauseAfterType);
+                    return;
+                }
+                elB.textContent = ROLE_PREFIX + nextRole.slice(0, roleCharIndex + 1);
+                roleCharIndex += 1;
+                window.setTimeout(typeRole, msType);
             }
 
             window.setTimeout(runType, startDelay);
