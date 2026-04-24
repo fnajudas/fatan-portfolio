@@ -53,6 +53,10 @@
             padding-bottom: env(safe-area-inset-bottom, 0);
         }
 
+        body.nav-open-lock {
+            overflow: hidden;
+        }
+
         /* Skip link — keyboard / screen reader users */
         .skip-link {
             position: absolute;
@@ -210,6 +214,29 @@
             box-shadow: 0 16px 36px rgba(17, 24, 39, 0.12);
             overflow: hidden;
             min-width: 200px;
+        }
+
+        @media (max-width: 719px) {
+            nav {
+                position: static;
+            }
+
+            .nav-links {
+                position: fixed;
+                left: var(--gutter-x);
+                right: var(--gutter-x);
+                top: calc(var(--mobile-nav-top, 68px) + 0.45rem);
+                width: auto;
+                min-width: 0;
+                border-radius: 14px;
+                border: 1px solid var(--border);
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(8px);
+                box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+                max-height: calc(100dvh - var(--mobile-nav-top, 68px) - 1.25rem);
+                overflow-y: auto;
+                z-index: 1200;
+            }
         }
 
         .nav-links li {

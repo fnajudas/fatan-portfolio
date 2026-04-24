@@ -18,6 +18,10 @@
         const progressBar = document.getElementById('reading-progress-bar');
         const backToTopButton = document.querySelector('.back-to-top');
         const sectionLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+        const updateMobileNavTop = () => {
+            if (!header) return;
+            document.documentElement.style.setProperty('--mobile-nav-top', `${Math.round(header.getBoundingClientRect().height)}px`);
+        };
 
         const updateReadingProgress = () => {
             if (!progressBar) return;
@@ -58,20 +62,25 @@
         }
 
         if (navToggle && navLinks && header) {
+            const closeMobileNav = () => {
+                header.classList.remove('nav-open');
+                navToggle.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('nav-open-lock');
+            };
+
             navToggle.addEventListener('click', () => {
                 const isOpen = header.classList.toggle('nav-open');
                 navToggle.setAttribute('aria-expanded', String(isOpen));
+                document.body.classList.toggle('nav-open-lock', isOpen);
             });
             navLinks.querySelectorAll('a').forEach((link) => {
                 link.addEventListener('click', () => {
-                    header.classList.remove('nav-open');
-                    navToggle.setAttribute('aria-expanded', 'false');
+                    closeMobileNav();
                 });
             });
             document.addEventListener('keydown', (e) => {
                 if (e.key !== 'Escape' || !header.classList.contains('nav-open')) return;
-                header.classList.remove('nav-open');
-                navToggle.setAttribute('aria-expanded', 'false');
+                closeMobileNav();
                 navToggle.focus();
             });
             document.addEventListener('click', (e) => {
@@ -79,8 +88,7 @@
                 if (!(target instanceof Element)) return;
                 if (!header.classList.contains('nav-open')) return;
                 if (target.closest('.site-header')) return;
-                header.classList.remove('nav-open');
-                navToggle.setAttribute('aria-expanded', 'false');
+                closeMobileNav();
             });
         }
 
@@ -111,12 +119,17 @@
         updateReadingProgress();
         updateBackToTopState();
         setActiveNavLink();
+        updateMobileNavTop();
         window.addEventListener('scroll', () => {
             updateReadingProgress();
             updateBackToTopState();
             setActiveNavLink();
+            updateMobileNavTop();
         }, { passive: true });
-        window.addEventListener('resize', setActiveNavLink);
+        window.addEventListener('resize', () => {
+            setActiveNavLink();
+            updateMobileNavTop();
+        });
 
         (function typewriterHero() {
             const root = document.getElementById('typewriter-root');
