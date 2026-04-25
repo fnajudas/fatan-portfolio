@@ -10,17 +10,44 @@
             header.classList.toggle('scrolled', offset);
         };
 
-        setHeaderState();
-        window.addEventListener('scroll', setHeaderState, { passive: true });
-
         const mainEl = document.getElementById('main');
         const skipLink = document.querySelector('.skip-link');
         const progressBar = document.getElementById('reading-progress-bar');
         const backToTopButton = document.querySelector('.back-to-top');
         const sectionLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+        let activeSectionId = 'home';
+        const sectionVisibilityMap = new Map();
+
+        const applyActiveNavLink = () => {
+            sectionLinks.forEach((link) => {
+                const isActive = link.getAttribute('href') === `#${activeSectionId}`;
+                link.setAttribute('aria-current', isActive ? 'page' : 'false');
+            });
+        };
+
+        const resolveMostVisibleSection = () => {
+            if (!sectionVisibilityMap.size) {
+                activeSectionId = window.scrollY < 180 ? 'home' : activeSectionId;
+                applyActiveNavLink();
+                return;
+            }
+
+            let bestId = activeSectionId;
+            let bestRatio = -1;
+            sectionVisibilityMap.forEach((ratio, id) => {
+                if (ratio > bestRatio) {
+                    bestRatio = ratio;
+                    bestId = id;
+                }
+            });
+            activeSectionId = bestId;
+            applyActiveNavLink();
+        };
+
         const updateMobileNavTop = () => {
             if (!header) return;
-            document.documentElement.style.setProperty('--mobile-nav-top', `${Math.round(header.getBoundingClientRect().height)}px`);
+            const headerHeight = Math.round(header.offsetHeight);
+            document.documentElement.style.setProperty('--mobile-nav-top', `${headerHeight}px`);
         };
 
         const updateReadingProgress = () => {
@@ -34,25 +61,6 @@
         const updateBackToTopState = () => {
             if (!backToTopButton) return;
             backToTopButton.classList.toggle('is-visible', window.scrollY > 520);
-        };
-
-        const setActiveNavLink = () => {
-            if (!sectionLinks.length) return;
-            let activeSectionId = 'home';
-            sectionLinks.forEach((link) => {
-                const targetId = link.getAttribute('href')?.slice(1);
-                if (!targetId) return;
-                const section = document.getElementById(targetId);
-                if (!section) return;
-                const rect = section.getBoundingClientRect();
-                if (rect.top <= 140 && rect.bottom >= 140) {
-                    activeSectionId = targetId;
-                }
-            });
-            sectionLinks.forEach((link) => {
-                const isActive = link.getAttribute('href') === `#${activeSectionId}`;
-                link.setAttribute('aria-current', isActive ? 'page' : 'false');
-            });
         };
 
         if (skipLink && mainEl) {
@@ -72,6 +80,7 @@
                 const isOpen = header.classList.toggle('nav-open');
                 navToggle.setAttribute('aria-expanded', String(isOpen));
                 document.body.classList.toggle('nav-open-lock', isOpen);
+                updateMobileNavTop();
             });
             navLinks.querySelectorAll('a').forEach((link) => {
                 link.addEventListener('click', () => {
@@ -180,6 +189,32 @@
             lazyObserver.observe(sectionEl);
         };
 
+        const sectionTargets = sectionLinks
+            .map((link) => {
+                const targetId = link.getAttribute('href')?.slice(1);
+                if (!targetId) return null;
+                const section = document.getElementById(targetId);
+                return section ? { id: targetId, section } : null;
+            })
+            .filter(Boolean);
+
+        if (sectionTargets.length) {
+            const navSectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    const targetId = entry.target.getAttribute('id');
+                    if (!targetId) return;
+                    if (!entry.isIntersecting) {
+                        sectionVisibilityMap.delete(targetId);
+                        return;
+                    }
+                    sectionVisibilityMap.set(targetId, entry.intersectionRatio);
+                });
+                resolveMostVisibleSection();
+            }, { threshold: [0.15, 0.35, 0.6] });
+
+            sectionTargets.forEach(({ section }) => navSectionObserver.observe(section));
+        }
+
         const observer = new IntersectionObserver(
             (entries, obs) => {
                 entries.forEach((entry) => {
@@ -197,18 +232,29 @@
         setupLazySectionRender({ sectionId: 'skills', targetId: 'skills-grid-dynamic', cardClass: 'skill-card', sectionKey: 'skills', placeholderCount: 3 }, observer);
         setupLazySectionRender({ sectionId: 'experience', targetId: 'experience-timeline-dynamic', cardClass: 'experience-item', sectionKey: 'experience', placeholderCount: 3 }, observer);
         setupLazySectionRender({ sectionId: 'projects', targetId: 'project-grid-dynamic', cardClass: 'project-card', sectionKey: 'projects', placeholderCount: 3 }, observer);
-        updateReadingProgress();
-        updateBackToTopState();
-        setActiveNavLink();
-        updateMobileNavTop();
-        window.addEventListener('scroll', () => {
+
+        const runScrollEffects = () => {
+            setHeaderState();
             updateReadingProgress();
             updateBackToTopState();
-            setActiveNavLink();
-            updateMobileNavTop();
-        }, { passive: true });
+        };
+
+        let rafScrollScheduled = false;
+        const scheduleScrollEffects = () => {
+            if (rafScrollScheduled) return;
+            rafScrollScheduled = true;
+            window.requestAnimationFrame(() => {
+                runScrollEffects();
+                rafScrollScheduled = false;
+            });
+        };
+
+        runScrollEffects();
+        applyActiveNavLink();
+        updateMobileNavTop();
+        window.addEventListener('scroll', scheduleScrollEffects, { passive: true });
         window.addEventListener('resize', () => {
-            setActiveNavLink();
+            runScrollEffects();
             updateMobileNavTop();
         });
 

@@ -31,7 +31,9 @@
     <meta name="twitter:url" content="https://fatan-portfolio.netlify.app/">
     <meta name="twitter:image" content="https://fatan-portfolio.netlify.app/assets/image/og-image.png">
     <meta name="twitter:image:alt" content="Fatan Najuda — Engineering Portfolio">
-        <link rel="stylesheet" href="assets/css/main.min.css">
+    <link rel="stylesheet" href="assets/css/critical.min.css">
+    <link rel="preload" href="assets/css/main.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="assets/css/main.min.css"></noscript>
 
     <script defer src="assets/js/main.min.js"></script>
     <script type="application/ld+json">
@@ -168,7 +170,26 @@
 
             <div class="reveal reveal-from-right">
                 <figure class="profile-frame" aria-label="Profile photo">
-                    <img src="assets/image/FOTO-DIRI.png" alt="Portrait of Muhammad Fatan Najuda Sarwan" loading="lazy">
+                    <picture>
+                        <source
+                            type="image/avif"
+                            srcset="assets/image/FOTO-DIRI-240.avif 240w, assets/image/FOTO-DIRI-320.avif 320w, assets/image/FOTO-DIRI-484.avif 484w"
+                            sizes="(max-width: 720px) 70vw, 320px">
+                        <source
+                            type="image/webp"
+                            srcset="assets/image/FOTO-DIRI-240.webp 240w, assets/image/FOTO-DIRI-320.webp 320w, assets/image/FOTO-DIRI-484.webp 484w"
+                            sizes="(max-width: 720px) 70vw, 320px">
+                        <img
+                            src="assets/image/FOTO-DIRI-320.png"
+                            srcset="assets/image/FOTO-DIRI-240.png 240w, assets/image/FOTO-DIRI-320.png 320w, assets/image/FOTO-DIRI-484.png 484w"
+                            sizes="(max-width: 720px) 70vw, 320px"
+                            width="484"
+                            height="515"
+                            alt="Portrait of Muhammad Fatan Najuda Sarwan"
+                            fetchpriority="high"
+                            loading="eager"
+                            decoding="async">
+                    </picture>
                 </figure>
             </div>
         </section>

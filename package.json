@@ -4,14 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build:images": "node scripts/generate-images.js",
     "build:css": "cleancss -O2 -o assets/css/main.min.css assets/css/main.src.css",
+    "build:css:critical": "cleancss -O2 -o assets/css/critical.min.css assets/css/critical.src.css",
     "build:js:min": "terser assets/js/main.src.js --compress --mangle --ecma 2020 -o assets/js/main.min.js",
     "build:js:sections:min": "mkdir -p assets/js/sections && for f in assets/js/sections/*.src.js; do [ -e \"$f\" ] || continue; terser \"$f\" --compress --mangle --ecma 2020 -o \"${f%.src.js}.min.js\"; done",
     "build:js:obfuscate": "javascript-obfuscator assets/js/main.min.js --output assets/js/main.min.js --compact true --self-defending true --string-array true --string-array-threshold 0.75 --disable-console-output true",
     "build:js:sections:obfuscate": "for f in assets/js/sections/*.min.js; do [ -e \"$f\" ] || continue; javascript-obfuscator \"$f\" --output \"$f\" --compact true --self-defending true --string-array true --string-array-threshold 0.75 --disable-console-output true; done",
     "build:html": "mkdir -p dist && html-minifier-terser --collapse-whitespace --remove-comments --remove-redundant-attributes --remove-script-type-attributes --remove-style-link-type-attributes --minify-css true --minify-js true -o dist/index.html index.html",
     "build:copy": "cp -R assets dist/assets && rm -f dist/assets/js/*.src.js dist/assets/js/sections/*.src.js dist/assets/css/*.src.css dist/assets/js/*.map dist/assets/js/sections/*.map dist/assets/css/*.map && cp robots.txt sitemap.xml _headers dist/ && if [ -f google49418de52c5c2bed.html ]; then cp google49418de52c5c2bed.html dist/; fi",
-    "build": "rm -rf dist && npm run build:css && npm run build:js:min && npm run build:js:sections:min && npm run build:js:obfuscate && npm run build:js:sections:obfuscate && npm run build:html && npm run build:copy"
+    "build": "rm -rf dist && npm run build:images && npm run build:css:critical && npm run build:css && npm run build:js:min && npm run build:js:sections:min && npm run build:js:obfuscate && npm run build:js:sections:obfuscate && npm run build:html && npm run build:copy"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,7 @@
     "clean-css-cli": "^5.6.3",
     "html-minifier-terser": "^7.2.0",
     "javascript-obfuscator": "^5.4.1",
+    "sharp": "^0.34.5",
     "terser": "^5.46.2"
   },
   "private": true
