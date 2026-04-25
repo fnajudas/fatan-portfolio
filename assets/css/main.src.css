@@ -32,6 +32,7 @@
 
         html {
             scroll-behavior: smooth;
+            scrollbar-gutter: stable;
         }
 
         body.no-js .reveal {
@@ -185,15 +186,27 @@
         }
 
         .brand-mark {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: var(--accent);
-            color: #fff;
-            display: grid;
-            place-items: center;
-            font-weight: 800;
-            box-shadow: var(--shadow-accent);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 0;
+            color: var(--accent-strong);
+        }
+
+        .brand-mark-svg {
+            display: block;
+            width: 2.75rem;
+            height: 1.375rem;
+        }
+
+        .brand-mark-text {
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .brand:hover .brand-mark,
+        .brand:focus-visible .brand-mark {
+            color: var(--accent);
         }
 
         nav {
@@ -384,6 +397,55 @@
 
         #typewriter-root {
             display: inline;
+        }
+
+        .typewriter-a {
+            display: inline;
+        }
+
+        .typewriter-a-prefix {
+            display: inline;
+            color: var(--text-strong);
+        }
+
+        /* "Fatan Najuda": solid saat mengetik; kilau halus hanya setelah .is-shine-ready (ditambah JS) */
+        .hero-typewriter-h1 .typewriter-a-name {
+            display: inline;
+            color: var(--text-strong);
+        }
+
+        .hero-typewriter-h1 .typewriter-a-name.is-shine-ready {
+            color: transparent;
+            background-image: linear-gradient(
+                102deg,
+                var(--text-strong) 0%,
+                var(--text-strong) 28%,
+                rgba(var(--accent-rgb), 0.35) 42%,
+                rgba(255, 255, 255, 0.16) 50%,
+                rgba(var(--accent-rgb), 0.28) 58%,
+                var(--text-strong) 72%,
+                var(--text-strong) 100%
+            );
+            background-size: 320% 100%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: heroNameShine 6.8s cubic-bezier(0.4, 0.06, 0.22, 1) infinite;
+        }
+
+        @keyframes heroNameShine {
+            0%,
+            46% {
+                background-position: 130% 50%;
+            }
+
+            80% {
+                background-position: -34% 50%;
+            }
+
+            100% {
+                background-position: 130% 50%;
+            }
         }
 
         /* Kursor di #typewriter-b agar ikut nowrap → menempel setelah titik */
@@ -601,6 +663,7 @@
             gap: 0.4rem;
             padding: 0.38rem 0.85rem;
             border-radius: 999px;
+            border: 1px solid rgba(var(--accent-rgb), 0.2);
             background: rgba(var(--accent-rgb), 0.1);
             color: var(--accent-strong);
             font-weight: 700;
@@ -767,9 +830,31 @@
             font-family: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
             font-size: 0.83rem;
             line-height: 1.68;
-            color: #1e293b;
+            color: var(--text-strong);
             white-space: pre-wrap;
             word-break: break-word;
+        }
+
+        .about-json-code {
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+            color: inherit;
+        }
+
+        /* Syntax-ish highlighting: calm, on-brand (not full IDE neon) */
+        .about-json-body .about-json-k {
+            color: var(--accent-strong);
+            font-weight: 600;
+        }
+
+        .about-json-body .about-json-s {
+            color: #115e59;
+        }
+
+        .about-json-body .about-json-p {
+            color: var(--text-soft);
+            font-weight: 500;
         }
 
         /* Skills */
@@ -905,8 +990,8 @@
         }
 
         .experience-item li {
-            margin-bottom: 0.4rem;
-            line-height: 1.6;
+            margin-bottom: 0.55rem;
+            line-height: 1.68;
         }
 
         .tech-stack-list {
@@ -972,7 +1057,7 @@
         }
 
         .period {
-            color: var(--text-soft);
+            color: var(--muted);
             font-weight: 600;
             font-size: 0.9rem;
             display: block;
@@ -1546,6 +1631,16 @@
 
             .hero-typewriter-h1 {
                 animation: none !important;
+            }
+
+            .hero-typewriter-h1 .typewriter-a-name,
+            .hero-typewriter-h1 .typewriter-a-name.is-shine-ready {
+                animation: none !important;
+                background: none !important;
+                background-clip: border-box !important;
+                -webkit-background-clip: border-box !important;
+                -webkit-text-fill-color: var(--text-strong) !important;
+                color: var(--text-strong) !important;
             }
 
             #typewriter-b.is-typewriter-active::after {

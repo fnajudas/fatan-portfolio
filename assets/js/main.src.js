@@ -134,22 +134,32 @@
         (function typewriterHero() {
             const root = document.getElementById('typewriter-root');
             const elA = document.getElementById('typewriter-a');
+            const elPrefix = document.getElementById('typewriter-a-prefix');
+            const elName = document.getElementById('typewriter-a-name');
             const elB = document.getElementById('typewriter-b');
             if (!root || !elA || !elB) return;
 
-            const PART_A = "Hi, I'm Fatan Najuda ";
+            const PREFIX = "Hi, I'm ";
+            const NAME = "Fatan Najuda ";
+            const PART_A = PREFIX + NAME;
             const ROLE_PREFIX = "— ";
             const roles = [
                 "Backend\u00A0Engineer",
                 "Data\u00A0Engineer",
-                "Technical\u00A0Mentor"
+                "Technical\u00A0Mentor",
+                "Product\u00A0Engineer"
             ];
             const firstRole = ROLE_PREFIX + roles[0];
             const fullPlain = PART_A + firstRole;
 
             const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             if (reduced) {
-                elA.textContent = PART_A;
+                if (elPrefix && elName) {
+                    elPrefix.textContent = PREFIX;
+                    elName.textContent = NAME;
+                } else {
+                    elA.textContent = PART_A;
+                }
                 elB.textContent = firstRole;
                 elB.classList.add('typewriter-cursor--idle');
                 return;
@@ -169,18 +179,33 @@
             root.classList.add('is-typewriter-active');
             elB.classList.add('is-typewriter-active');
 
+            function setPartAVisible(n) {
+                if (elPrefix && elName) {
+                    const take = Math.min(n, PREFIX.length);
+                    elPrefix.textContent = PART_A.slice(0, take);
+                    elName.textContent = n <= PREFIX.length ? '' : PART_A.slice(PREFIX.length, n);
+                    if (n >= lenA) {
+                        elName.classList.add('is-shine-ready');
+                    } else {
+                        elName.classList.remove('is-shine-ready');
+                    }
+                } else {
+                    elA.textContent = PART_A.slice(0, n);
+                }
+            }
+
             function runType() {
                 if (i >= fullPlain.length) {
-                    elA.textContent = PART_A;
+                    setPartAVisible(PART_A.length);
                     elB.textContent = firstRole;
                     window.setTimeout(deleteRole, pauseAfterType);
                     return;
                 }
                 if (i < lenA) {
-                    elA.textContent = fullPlain.slice(0, i + 1);
+                    setPartAVisible(i + 1);
                     elB.textContent = '';
                 } else {
-                    elA.textContent = PART_A;
+                    setPartAVisible(PART_A.length);
                     elB.textContent = fullPlain.slice(lenA, i + 1);
                 }
                 i += 1;
