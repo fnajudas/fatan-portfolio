@@ -8,7 +8,7 @@
     "build:js:min": "terser assets/js/main.src.js --compress --mangle --ecma 2020 -o assets/js/main.min.js",
     "build:js:obfuscate": "javascript-obfuscator assets/js/main.min.js --output assets/js/main.min.js --compact true --self-defending true --string-array true --string-array-threshold 0.75 --disable-console-output true",
     "build:html": "mkdir -p dist && html-minifier-terser --collapse-whitespace --remove-comments --remove-redundant-attributes --remove-script-type-attributes --remove-style-link-type-attributes --minify-css true --minify-js true -o dist/index.html index.html",
-    "build:copy": "cp -R assets dist/assets && cp robots.txt sitemap.xml _headers dist/ && if [ -f google49418de52c5c2bed.html ]; then cp google49418de52c5c2bed.html dist/; fi",
+    "build:copy": "cp -R assets dist/assets && rm -f dist/assets/js/*.src.js dist/assets/css/*.src.css dist/assets/js/*.map dist/assets/css/*.map && cp robots.txt sitemap.xml _headers dist/ && if [ -f google49418de52c5c2bed.html ]; then cp google49418de52c5c2bed.html dist/; fi",
     "build": "rm -rf dist && npm run build:css && npm run build:js:min && npm run build:js:obfuscate && npm run build:html && npm run build:copy"
   },
   "repository": {
