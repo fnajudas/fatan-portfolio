@@ -4,6 +4,10 @@
   Permissions-Policy: geolocation=(), camera=(), microphone=()
   Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' https: data:; font-src 'self' https: data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; upgrade-insecure-requests
 
-/assets/cv/resume-8f3c1d2a.pdf
+/assets/image/FOTO-DIRI*
+  X-Robots-Tag: noindex, noarchive
+  Cache-Control: private, max-age=300
+
+/assets/cv/*
   X-Robots-Tag: noindex, noarchive, nosnippet
-  Cache-Control: private, max-age=0, no-store
+  Cache-Control: public, max-age=0, must-revalidate, s-maxage=86400

@@ -9,7 +9,7 @@ window.PortfolioSectionRenderers.skills = function renderSkillsSection(revealObs
         { title: 'Databases', desc: 'Reliable persistence and query tuning for operational workloads.', badges: ['MongoDB', 'Redis', 'MySQL', 'PostgreSQL', 'Elasticsearch'] },
         { title: 'Data Engineering', desc: 'Orchestrated pipelines, modeled layers, and trusted dashboards.', badges: ['Python', 'Airflow', 'BigQuery', 'Jinja', 'dbt', 'GCS'] },
         { title: 'DevOps / Cloud', desc: 'Move fast with dependable environments and storage.', badges: ['AWS S3', 'GCP Composer', 'GCP Cloud Storage', 'Kubernetes', 'Docker', 'GitLab CI/CD', 'Nginx', 'Grafana', 'OpenTelemetry', 'Jaeger', 'Google Pub/Sub', 'MinIO', 'FCM'] },
-        { title: 'Practices', desc: 'Intentional architecture and quality at every layer.', badges: ['Modern Architecture', 'Unit Testing', 'Object Oriented Programming', 'Software Development Approaches'] }
+        { title: 'Practices', desc: 'Architecture and habits that survive code review, production, and the occasional audit.', badges: ['Modern Architecture', 'Unit Testing', 'Object Oriented Programming', 'Software Development Approaches', 'ISO 27001 (ISMS)'] }
     ];
 
     skillsGrid.innerHTML = skills.map((skill) => `

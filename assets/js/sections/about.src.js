@@ -7,13 +7,15 @@ window.PortfolioSectionRenderers.about = function renderAboutSection(revealObser
     aboutLayout.innerHTML = `
         <article class="about-copy reveal reveal-from-left">
             <p class="about-intro">I am <span class="about-keywords">Muhammad Fatan Najuda Sarwan</span>, a backend engineer with 5+ years of experience delivering production systems in fintech, agriculture, education, and LMS products.</p>
-            <p>I specialize in <span class="about-keywords">Golang services</span>, <span class="about-keywords">data pipelines</span>, and <span class="about-keywords">cloud-native architecture</span>. I enjoy designing APIs, data models, and workflows that are easy to evolve as products grow.</p>
-            <p>Beyond implementation, I support teams through code review, mentoring, and technical training so delivery quality stays high and production stays predictable.</p>
+            <p>I specialise in <span class="about-keywords">Golang services</span>, <span class="about-keywords">data pipelines</span>, and <span class="about-keywords">cloud-native architecture</span>. I enjoy designing APIs, data models, and workflows that are easy to evolve as products grow.</p>
+            <p>Most of my day is still code and systems, but I also run reviews, mentor juniors, and run the odd internal session when something needs explaining properly.</p>
+            <p>On <span class="about-keywords">ISO 27001</span>, I owned the ISMS rollout: scope, policies, risk treatment, access and asset registers, and an evidence trail that reflected how we really worked, not paperwork rushed through at the last minute.</p>
             <div class="about-metrics" aria-label="Career highlights">
                 <div class="about-metric"><strong>5+</strong><span>Years Experience</span></div>
                 <div class="about-metric"><strong>20%+</strong><span>System Performance Gains</span></div>
                 <div class="about-metric"><strong>4 Domains</strong><span>Cross-Industry Delivery</span></div>
                 <div class="about-metric"><strong>Mentoring</strong><span>Technical Coaching</span></div>
+                <div class="about-metric"><strong>ISO 27001</strong><span>ISMS in place</span></div>
             </div>
         </article>
         <aside class="about-json-card reveal reveal-from-right" aria-label="About profile in JSON">
@@ -35,8 +37,10 @@ window.PortfolioSectionRenderers.about = function renderAboutSection(revealObser
     <span class="about-json-s">"Golang backend services"</span><span class="about-json-p">,</span>
     <span class="about-json-s">"Data engineering (Airflow, dbt, BigQuery)"</span><span class="about-json-p">,</span>
     <span class="about-json-s">"Cloud systems (AWS, GCP)"</span><span class="about-json-p">,</span>
-    <span class="about-json-s">"Mentoring and technical training"</span>
+    <span class="about-json-s">"Mentoring and technical training"</span><span class="about-json-p">,</span>
+    <span class="about-json-s">"ISO 27001: hands-on ISMS work"</span>
   <span class="about-json-p">]</span><span class="about-json-p">,</span>
+  <span class="about-json-k">"informationSecurity"</span><span class="about-json-p">:</span> <span class="about-json-s">"ISO 27001 ISMS (built and run in-house)"</span><span class="about-json-p">,</span>
   <span class="about-json-k">"availability"</span><span class="about-json-p">:</span> <span class="about-json-s">"Open for backend roles and collaborations"</span>
 }</code></pre>
         </aside>

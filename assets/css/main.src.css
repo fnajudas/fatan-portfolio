@@ -364,14 +364,13 @@
             font-size: 0.9rem;
         }
 
-        /* Ruang tetap: cegah subhead “melompat” saat typewriter mengetik/menghapus */
+        /* Fixed vertical slot for typewriter CLS; values tuned tight to final ~2–3 line headline height. */
         .hero-headline-block {
-            height: clamp(6.9rem, 17vw, 9.4rem);
             width: 100%;
-            overflow: hidden;
+            overflow: visible;
             padding-right: 0.35em;
-            display: grid;
-            align-content: start;
+            margin: 0;
+            min-height: clamp(8.05rem, 11vw + 5rem, 9rem);
         }
 
         .hero-typewriter-h1 {
@@ -379,6 +378,7 @@
             margin: 0;
             font-weight: 900;
             letter-spacing: -0.03em;
+            line-height: 1.12;
             animation: heroRise 0.8s ease-out both;
             text-wrap: wrap;
             padding-right: 0.2em;
@@ -586,6 +586,17 @@
             display: grid;
             place-items: center;
             position: relative;
+        }
+
+        /* Deter casual save-image / drag (not a full lock; URL remains in DevTools). */
+        .profile-frame--protected {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .profile-frame--protected img {
+            -webkit-user-drag: none;
+            user-drag: none;
         }
 
         .profile-frame::after {
@@ -1491,12 +1502,10 @@
         @keyframes heroRise {
             from {
                 opacity: 0;
-                transform: translateY(14px);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
             }
         }
 

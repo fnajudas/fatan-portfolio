@@ -1,5 +1,46 @@
         document.body.classList.replace('no-js', 'js');
 
+        const profileProtect = document.querySelector('.profile-frame--protected');
+        if (profileProtect) {
+            profileProtect.addEventListener('contextmenu', (e) => e.preventDefault());
+            profileProtect.addEventListener('dragstart', (e) => e.preventDefault());
+        }
+
+        const cvDownload = document.querySelector('a[href*="assets/cv/"][download]');
+        if (cvDownload) {
+            const suggestedName = cvDownload.getAttribute('download') || 'Muhammad Fatan Najuda Sarwan - Resume.pdf';
+            cvDownload.addEventListener('click', async (e) => {
+                if (e.defaultPrevented || e.button !== 0) return;
+                if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+                const hrefAttr = cvDownload.getAttribute('href');
+                if (!hrefAttr) return;
+                let abs;
+                try {
+                    abs = new URL(hrefAttr, document.baseURI).href;
+                } catch (_) {
+                    return;
+                }
+                if (!abs.startsWith(window.location.origin)) return;
+                e.preventDefault();
+                try {
+                    const res = await fetch(abs);
+                    if (!res.ok) throw new Error(String(res.status));
+                    const blob = await res.blob();
+                    const objUrl = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = objUrl;
+                    a.download = suggestedName;
+                    a.rel = 'noopener';
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    window.setTimeout(() => URL.revokeObjectURL(objUrl), 4000);
+                } catch (_) {
+                    window.location.href = abs;
+                }
+            });
+        }
+
         const header = document.querySelector('.site-header');
         const navToggle = document.querySelector('.nav-toggle');
         const navLinks = document.querySelector('.nav-links');
@@ -126,16 +167,41 @@
             `;
             targetEl.innerHTML = new Array(count).fill(placeholder).join('');
         };
-        const sectionScripts = {
-            about: 'assets/js/sections/about.min.js',
-            skills: 'assets/js/sections/skills.min.js',
-            experience: 'assets/js/sections/experience.min.js',
-            projects: 'assets/js/sections/projects.min.js'
+        /* Resolve next to main.min.js so previews/subpaths match deploy (document-relative paths alone can 404). */
+        const sectionScriptFilenames = {
+            about: 'sections/about.min.js',
+            skills: 'sections/skills.min.js',
+            experience: 'sections/experience.min.js',
+            projects: 'sections/projects.min.js'
+        };
+        const getBundledScriptDir = () => {
+            try {
+                const nodes = document.querySelectorAll('script[src*="main.min"],script[src*="main.src"]');
+                for (let i = 0; i < nodes.length; i += 1) {
+                    const attr = nodes[i].getAttribute('src');
+                    if (!attr) continue;
+                    const abs = new URL(attr, document.baseURI).href;
+                    if (/\/main\.(min|src)\.js(\?|#|$)/i.test(abs)) {
+                        return new URL('.', abs).href;
+                    }
+                }
+            } catch (_) { /* ignore */ }
+            return new URL('assets/js/', document.baseURI).href;
+        };
+        const bundledScriptDir = getBundledScriptDir();
+        const sectionScriptSrc = (sectionKey) => {
+            const file = sectionScriptFilenames[sectionKey];
+            if (!file) return '';
+            try {
+                return new URL(file, bundledScriptDir).href;
+            } catch (_) {
+                return '';
+            }
         };
         const loadedSectionScripts = new Set();
 
         const loadSectionScript = (sectionKey) => new Promise((resolve, reject) => {
-            const src = sectionScripts[sectionKey];
+            const src = sectionScriptSrc(sectionKey);
             if (!src) {
                 reject(new Error(`Unknown section key: ${sectionKey}`));
                 return;
@@ -161,32 +227,63 @@
             if (!sectionEl || !targetEl) return;
 
             renderCardSkeletons(targetEl, cardClass, placeholderCount);
+            const runRenderer = () => {
+                if (window.PortfolioSectionRenderers && typeof window.PortfolioSectionRenderers[sectionKey] === 'function') {
+                    window.PortfolioSectionRenderers[sectionKey](revealObserver);
+                }
+            };
+            const loadAndRender = () => loadSectionScript(sectionKey).then(runRenderer).catch(() => {
+                targetEl.innerHTML = '';
+            });
+
             const supportsObserver = 'IntersectionObserver' in window;
             if (!supportsObserver) {
-                loadSectionScript(sectionKey).then(() => {
-                    if (window.PortfolioSectionRenderers && typeof window.PortfolioSectionRenderers[sectionKey] === 'function') {
-                        window.PortfolioSectionRenderers[sectionKey](revealObserver);
-                    }
-                }).catch(() => {
-                    targetEl.innerHTML = '';
-                });
+                loadAndRender();
                 return;
             }
 
+            let renderStarted = false;
+            const tryLoad = (obs) => {
+                if (renderStarted) return;
+                renderStarted = true;
+                if (obs) obs.disconnect();
+                loadAndRender();
+            };
+
+            const rootMarginPx = 320;
             const lazyObserver = new IntersectionObserver((entries, obs) => {
                 const shouldRender = entries.some((entry) => entry.isIntersecting);
                 if (!shouldRender) return;
+                tryLoad(obs);
+            }, { rootMargin: `${rootMarginPx}px 0px`, threshold: 0.01 });
+
+            lazyObserver.observe(sectionEl);
+
+            const rect = sectionEl.getBoundingClientRect();
+            const vh = window.innerHeight || document.documentElement.clientHeight || 0;
+            if (rect.bottom > -rootMarginPx && rect.top < vh + rootMarginPx) {
+                tryLoad(lazyObserver);
+            }
+        };
+
+        const flushStuckSectionSkeletons = (revealObserver) => {
+            const rows = [
+                { sectionKey: 'about', targetId: 'about-layout-dynamic' },
+                { sectionKey: 'skills', targetId: 'skills-grid-dynamic' },
+                { sectionKey: 'experience', targetId: 'experience-timeline-dynamic' },
+                { sectionKey: 'projects', targetId: 'project-grid-dynamic' }
+            ];
+            rows.forEach(({ sectionKey, targetId }) => {
+                const el = document.getElementById(targetId);
+                if (!el || !el.querySelector('.skeleton')) return;
                 loadSectionScript(sectionKey).then(() => {
                     if (window.PortfolioSectionRenderers && typeof window.PortfolioSectionRenderers[sectionKey] === 'function') {
                         window.PortfolioSectionRenderers[sectionKey](revealObserver);
                     }
                 }).catch(() => {
-                    targetEl.innerHTML = '';
+                    el.innerHTML = '';
                 });
-                obs.disconnect();
-            }, { rootMargin: '220px 0px', threshold: 0.01 });
-
-            lazyObserver.observe(sectionEl);
+            });
         };
 
         const sectionTargets = sectionLinks
@@ -232,6 +329,11 @@
         setupLazySectionRender({ sectionId: 'skills', targetId: 'skills-grid-dynamic', cardClass: 'skill-card', sectionKey: 'skills', placeholderCount: 3 }, observer);
         setupLazySectionRender({ sectionId: 'experience', targetId: 'experience-timeline-dynamic', cardClass: 'experience-item', sectionKey: 'experience', placeholderCount: 3 }, observer);
         setupLazySectionRender({ sectionId: 'projects', targetId: 'project-grid-dynamic', cardClass: 'project-card', sectionKey: 'projects', placeholderCount: 3 }, observer);
+
+        window.addEventListener('load', () => {
+            window.setTimeout(() => flushStuckSectionSkeletons(observer), 1500);
+            window.setTimeout(() => flushStuckSectionSkeletons(observer), 4500);
+        });
 
         const runScrollEffects = () => {
             setHeaderState();
