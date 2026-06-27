@@ -167,12 +167,14 @@
             `;
             targetEl.innerHTML = new Array(count).fill(placeholder).join('');
         };
-        /* Resolve next to main.min.js so previews/subpaths match deploy (document-relative paths alone can 404). */
+        /* Local dev (e.g. Live Server :5500): load .src.js so saves apply without a build step. */
+        const isLocalDev = Boolean(window.__PORTFOLIO_LOCAL_DEV__);
+        const sectionScriptSuffix = isLocalDev ? 'src' : 'min';
         const sectionScriptFilenames = {
-            about: 'sections/about.min.js',
-            skills: 'sections/skills.min.js',
-            experience: 'sections/experience.min.js',
-            projects: 'sections/projects.min.js'
+            about: `sections/about.${sectionScriptSuffix}.js`,
+            skills: `sections/skills.${sectionScriptSuffix}.js`,
+            experience: `sections/experience.${sectionScriptSuffix}.js`,
+            projects: `sections/projects.${sectionScriptSuffix}.js`
         };
         const getBundledScriptDir = () => {
             try {
@@ -211,7 +213,7 @@
                 return;
             }
             const script = document.createElement('script');
-            script.src = src;
+            script.src = isLocalDev ? `${src}?v=${Date.now()}` : src;
             script.defer = true;
             script.onload = () => {
                 loadedSectionScripts.add(sectionKey);

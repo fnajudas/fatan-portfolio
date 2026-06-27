@@ -35,7 +35,16 @@
     <link rel="preload" href="assets/css/main.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="assets/css/main.min.css"></noscript>
 
-    <script defer src="assets/js/main.min.js"></script>
+    <script>
+        (function () {
+            var isLocalDev = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.port === '5500';
+            window.__PORTFOLIO_LOCAL_DEV__ = isLocalDev;
+            var script = document.createElement('script');
+            script.defer = true;
+            script.src = 'assets/js/main.' + (isLocalDev ? 'src' : 'min') + '.js' + (isLocalDev ? '?v=' + Date.now() : '');
+            document.head.appendChild(script);
+        }());
+    </script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
