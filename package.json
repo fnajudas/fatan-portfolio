@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "live-server --port=5500 --ignore=node_modules,dist,.git",
     "build:images": "node scripts/generate-images.js",
     "build:css": "cleancss -O2 -o assets/css/main.min.css assets/css/main.src.css",
     "build:css:critical": "cleancss -O2 -o assets/css/critical.min.css assets/css/critical.src.css",
@@ -30,8 +31,9 @@
   "devDependencies": {
     "clean-css-cli": "^5.6.3",
     "html-minifier-terser": "^7.2.0",
+    "live-server": "^1.2.2",
     "javascript-obfuscator": "^5.4.1",
-    "sharp": "^0.34.5",
+    "sharp": "^0.35.4",
     "terser": "^5.46.2"
   },
   "private": true
